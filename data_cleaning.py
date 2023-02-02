@@ -21,19 +21,13 @@ def remove_columns(dataframe):
     return dataframe.drop(columns=drop_columns)
 
 
-def string_format(dataframe, column):
-    dataframe[column] = dataframe[column].str.strip()
-    dataframe[column] = dataframe[column].str.title()
-    dataframe[column] = dataframe[column].str.replace('_', ' ')
-    return dataframe
-
-
 def standardise_species_name(dataframe):
-    # Strip text and format
+    # Strip text, remove underscores and add capitalised first letters
     det_match['species_name'] = det_match['species_name'].str.strip()
     det_match['species_name'] = det_match['species_name'].str.title()
     det_match['species_name'] = det_match['species_name'].str.replace('_', ' ')
 
+    # Cycle through the species_name column and correct alternate spelling
     remove_indices = []
     for idx, name in dataframe['species_name'].items():
         if (name in maps.to_remove):
@@ -43,12 +37,30 @@ def standardise_species_name(dataframe):
             if (name in alias_list):
                 dataframe.at[idx, 'species_name'] = correct_name
                 break
+
+    # Remove vague detections
     return dataframe.drop(index=remove_indices)
+
+
+def standardise_probability(dataframe):
+    # Trim whitespace and add capitalised first letters
+    dataframe['probability'] = dataframe['probability'].str.strip()
+    dataframe['probability'] = dataframe['probability'].str.title()
+
+    # Cycle through the probability column and correct alternate spelling
+    for idx, name in dataframe['probability'].items():
+        for correct_name, alias_list in maps.probability_map.items():
+            if (name in alias_list):
+                dataframe.at[idx, 'probability'] = correct_name
+                break
+
+    return dataframe
 
 
 if __name__ == '__main__':
     det_match = pd.read_csv('det_match.csv')
     det_match = remove_columns(det_match)
     det_match = standardise_species_name(det_match)
+    det_match = standardise_probability(det_match)
 
-    print(len(det_match['species_name'].unique()))
+    print(len(det_match['probability'].unique()))

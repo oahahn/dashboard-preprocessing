@@ -127,7 +127,7 @@ doubles = ['2 Macropod 1 Wombat', 'Possum And 2 Macropods', 'Wombat And Wallaby'
 
 probability_map = {
     'Low': ['0%'],
-    'Med': ['Medium', 'Probable', 'med', 'medium'],
+    'Med': ['Medium', 'Probable'],
     'High': ['high', 'Med/High'],
     '100%': ['Certain', 'Definite']
 }
