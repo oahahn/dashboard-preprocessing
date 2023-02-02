@@ -57,10 +57,28 @@ def standardise_probability(dataframe):
     return dataframe
 
 
+def standardise_species_category(dataframe):
+    # Trim whitespace and add capitalised first letters
+    dataframe['species_category'] = dataframe['species_category'].str.strip()
+    dataframe['species_category'] = dataframe['species_category'].str.title()
+    dataframe['species_category'] = dataframe['species_category'].str.replace('_', ' ')
+
+    # Cycle through the probability column and correct alternate spelling
+    for idx, name in dataframe['species_category'].items():
+        for correct_name, alias_list in maps.species_catgory_map.items():
+            if (name in alias_list):
+                dataframe.at[idx, 'species_category'] = correct_name
+                break
+
+    return dataframe
+
+
 if __name__ == '__main__':
     det_match = pd.read_csv('det_match.csv')
     det_match = remove_columns(det_match)
     det_match = standardise_species_name(det_match)
     det_match = standardise_probability(det_match)
+    det_match = standardise_species_category(det_match)
 
-    print(len(det_match['probability'].unique()))
+    print(len(det_match['species_name'].unique()))
+    print(len(det_match['species_category'].unique()))

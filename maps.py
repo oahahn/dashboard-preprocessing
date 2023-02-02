@@ -131,3 +131,17 @@ probability_map = {
     'High': ['high', 'Med/High'],
     '100%': ['Certain', 'Definite']
 }
+
+species_catgory_map = {
+    'Arboreal Species': ['Aboreal', 'Abroreal', 'Arboeal', 'Arborea', 'Arboreal (Sub-Canopy)', 'Arboreal Mid-Canopy',
+                         'Arboreal Sub-Canopy', 'Arboreal/Canopy', 'Arboreal/Ground', 'Arboreal?', 'Arboreral',
+                         'Canopy', 'Ground/ Sub Canopy', 'Ground/ Sub-Canopy', 'Ground/Subcanopy', 'Mid-Canopy'],
+    'Aerial Species': ['Aerial', 'Airborne', 'Airborne, Arboreal', 'Bird', 'Flying-Fox'],
+    'Glider': ['Glider', 'Greater Glider', 'Sugar Glider'],
+    'Ground Species': ['Deer', 'Ground', 'Ground?', 'Wombat'],
+    'Koala': [],
+    'Macropod': [],
+    'None': ['Hollow', 'No Detection', 'Other', 'Other - Add Details In Notes', 'Stag Hollow', 'Uncertain', 'Unknown',
+             'Unsure', 'nan', 'Both'],
+    'Possum': ['Brush Tail', 'Ring Tail']
+}
