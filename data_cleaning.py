@@ -1,4 +1,3 @@
-import pandas as pd
 import maps
 
 
@@ -23,9 +22,9 @@ def remove_columns(dataframe):
 
 def standardise_species_name(dataframe):
     # Strip text, remove underscores and add capitalised first letters
-    det_match['species_name'] = det_match['species_name'].str.strip()
-    det_match['species_name'] = det_match['species_name'].str.title()
-    det_match['species_name'] = det_match['species_name'].str.replace('_', ' ')
+    dataframe['species_name'] = dataframe['species_name'].str.strip()
+    dataframe['species_name'] = dataframe['species_name'].str.title()
+    dataframe['species_name'] = dataframe['species_name'].str.replace('_', ' ')
 
     # Cycle through the species_name column and correct alternate spelling
     remove_indices = []
@@ -73,12 +72,8 @@ def standardise_species_category(dataframe):
     return dataframe
 
 
-if __name__ == '__main__':
-    det_match = pd.read_csv('det_match.csv')
-    det_match = remove_columns(det_match)
-    det_match = standardise_species_name(det_match)
-    det_match = standardise_probability(det_match)
-    det_match = standardise_species_category(det_match)
-
-    print(len(det_match['species_name'].unique()))
-    print(len(det_match['species_category'].unique()))
+def clean_data(dataframe):
+    dataframe = remove_columns(dataframe)
+    dataframe = standardise_species_name(dataframe)
+    dataframe = standardise_probability(dataframe)
+    return standardise_species_category(dataframe)
