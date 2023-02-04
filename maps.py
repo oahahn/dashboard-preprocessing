@@ -1,10 +1,10 @@
 species_name_map = {
-    'Arboreal Species': ['Aboreal', 'Medium Sized Arboreal', 'Small Arboreal Sp.', 'Arboreal',
-                     'Arboreal Sp. -Small', 'Arboreal Sp.'
-                 'Arboreal Sp. Small', 'Arboreal Sp', 'Arboreal/Canopy',
-                 'Unsure. Medium-Sized Detection Half-Way Up Tree.', 'Unsure If Anything',
-                 'Detection Down Low On Trunk'],
+    'Arboreal Species': ['Aboreal', 'Medium Sized Arboreal', 'Small Arboreal Sp.', 'Arboreal', 'Arboreal Sp. -Small',
+                         'Arboreal Sp.', 'Arboreal Sp. Small', 'Arboreal Sp', 'Arboreal/Canopy',
+                         'Unsure. Medium-Sized Detection Half-Way Up Tree.', 'Unsure If Anything',
+                         'Detection Down Low On Trunk'],
     'Australian Brushturkey': ['Brush Turkey', 'Aus Brushturkeys'],
+    'Aerial Species': ['Aerial'],
     'Bandicoot': ['Small Possible Bandicoot', 'Bandicoit', 'Bandicoot/ Pademelon?', 'Bandicoot?', 'Bandicoot/ Potoroo',
                   'Bandicoot (?)', 'Unknown (Bandicoot/Macropod?)', 'Unknown Mammal (Likely Bandicoot)',
                   'Small Unknown (Likely Bandicoot)', 'Rabbit/Bandicoot'],
@@ -67,7 +67,7 @@ species_name_map = {
                  'Macropod (Large, Grey Kangaroo From Size)', 'Macopod', 'Macropod And 2 Small Ground Detections'],
     'Magpie': ['Magpies'],
     'Microbat': ['Microbat In Flight'],
-    'Mountain Brushtail Possum': ['Mountain Brush-Tailed Possum'],
+    'Mountain Brushtail Possum': ['Mountain Brush-Tailed Possum', 'Mountain Bobuck'],
     'Owl': ['Owl Sp.', 'Large Owl'],
     'Pademelon': ['Paddy Melon', 'Pademelon/ Parma Wallaby', 'Pademelon/Parma'],
     'Parrot': ['Parrot/ Cockatoos ?', 'Parrots'],
@@ -92,14 +92,13 @@ species_name_map = {
     'Tree Hollow': ['Animal In Chimney Hollow', 'Hollow Possible Occupants', 'Tree Hollow To Rd',
                     'Vertical Hollow', 'Tree Hollow/Bee Hive/Temrites', 'Hollow Plus Maybe Unknown Arboreal', 'Hollow ?',
                     'Occupied Hollow', 'Chimney Tree Hollow', 'Chimney Hollow', 'Chimney Hollows', 'Stag Hollow',
-                    'Occupied Hollow (In Fallen Stag)'],
-    'Unkown': ['Unknown - Not A Koala', 'Unknown (X2)', 'Unknown (Fast?)', 'Unknown, Small',
-               'Unvalidated', 'Validate Not Found', 'Small Mammal (X3)', '2X Small Mammal',
-               'Small Mammal', 'Small Mammal (X2)', 'Small Unknown', 'Small Mammal Sp',
-               'Smmall Mammal', 'Canopy', 'Mammal', 'Small Detection', 'Low'],
+                    'Occupied Hollow (In Fallen Stag)', 'Hollow'],
+    'Unknown': ['Unknown - Not A Koala', 'Unknown (X2)', 'Unknown (Fast?)', 'Unknown, Small', 'Unvalidated',
+                'Validate Not Found', 'Small Mammal (X3)', '2X Small Mammal', 'Small Mammal', 'Small Mammal (X2)',
+                'Small Unknown', 'Small Mammal Sp', 'Smmall Mammal', 'Canopy', 'Mammal', 'Small Detection', 'Low'],
     'Yellow-bellied Glider': ['Glider (Prob Yellow-Bellied)',
                               'Several Gliders/ Possums. 4 Probable Yellow-Bellied Gliders? Below (One Seen In Flight) Plus One Sugar Glider At Eye Level',
-                              'Yellow-Bellied Glider', 'Yellow Belly Glider'],
+                              'Yellow-Bellied Glider', 'Yellow Belly Glider', 'Yellow Glider'],
     'Yellow-tailed Black Cockatoo': ['Yellow-Tailed Black Cockatoos (Heard Call)',
                                      'Yellow-Tail Cockatoos (X8) - Validated'],
     'Wallaby': ['Wallaby And Other Small Ground Mammals?', 'Maybe Wallaby', 'Wallaby (Multiple)', 'Wallabies',
@@ -122,8 +121,8 @@ doubles = ['2 Macropod 1 Wombat', 'Possum And 2 Macropods', 'Wombat And Wallaby'
            'Greater Glider And Microbat', 'Greater Glider + 4 Uncertain Canopy (Possums, Gliders, Birds?)',
            'Probable Greater Glider + Wombat', 'Wombat And Macropod?',
            'Medium Sized Unknown Thermal - Ground/ Very Low Arboreal + Small Roosting Birds',
-           'Macropods And Wombat (3 Animals)', 'Ringtail And 3 Small Ground Mammals',
-           'Glider And Wombat', 'Wombat And Small Unidentified Ground']
+           'Macropods And Wombat (3 Animals)', 'Ringtail And 3 Small Ground Mammals', 'Glider And Wombat',
+           'Wombat And Small Unidentified Ground']
 
 probability_map = {
     'Low': ['0%'],
@@ -132,15 +131,25 @@ probability_map = {
     '100%': ['Certain', 'Definite']
 }
 
-species_catgory_map = {
+species_category_map = {
     'Arboreal Species': ['Aboreal', 'Abroreal', 'Arboeal', 'Arborea', 'Arboreal (Sub-Canopy)', 'Arboreal Mid-Canopy',
                          'Arboreal Sub-Canopy', 'Arboreal/Canopy', 'Arboreal/Ground', 'Arboreal?', 'Arboreral',
                          'Canopy', 'Ground/ Sub Canopy', 'Ground/ Sub-Canopy', 'Ground/Subcanopy', 'Mid-Canopy',
-                         'Arboreal'],
+                         'Arboreal', 'Arboreal Sp.', 'Arboreal Sp. Small'],
     'Aerial Species': ['Aerial', 'Airborne', 'Airborne, Arboreal', 'Bird', 'Flying-Fox'],
     'Glider': ['Glider', 'Greater Glider', 'Sugar Glider'],
     'Ground Species': ['Deer', 'Ground', 'Ground?', 'Wombat'],
     'None': ['Hollow', 'No Detection', 'Other', 'Other - Add Details In Notes', 'Stag Hollow', 'Uncertain', 'Unknown',
              'Unsure', 'nan', 'Both'],
     'Possum': ['Brush Tail', 'Ring Tail']
+}
+
+species_category_corrections = {
+    'Aerial Species': ['Musk Lorikeet', 'Kookaburra', 'Bat', 'Microbat', 'Sooty Owl', 'Parrot', 'Cockatoo',
+                       'Yellow-tailed Black Cockatoo', 'Dusky Woodswallow', 'Powerful Owl', 'Grey-headed Flying Fox',
+                       'Common Bronzewing', 'Magpie'],
+    'Ground Species': ['Cat', 'Fox', 'Cow'],
+    'Glider': ['Kreffts Glider', 'Yellow-bellied Glider'],
+    'Macropod': ['Potoroo', 'Pademelon'],
+    'Possum': ['Mountain Brushtail Possum', 'Ringtail Possum', 'Short-eared Possum'],
 }
