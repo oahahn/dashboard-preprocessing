@@ -29,11 +29,11 @@ def standardise_species_name(dataframe):
     # Cycle through the species_name column and correct alternate spelling
     remove_indices = []
     for idx, name in dataframe['species_name'].items():
-        if (name in maps.to_remove):
+        if name in maps.to_remove:
             remove_indices.append(idx)
             continue
         for correct_name, alias_list in maps.species_name_map.items():
-            if (name in alias_list):
+            if name in alias_list:
                 dataframe.at[idx, 'species_name'] = correct_name
                 break
 
@@ -64,11 +64,20 @@ def standardise_species_category(dataframe):
 
     # Cycle through the probability column and correct alternate spelling
     for idx, name in dataframe['species_category'].items():
-        for correct_name, alias_list in maps.species_catgory_map.items():
-            if (name in alias_list):
+        for correct_name, alias_list in maps.species_category_map.items():
+            if name in alias_list:
                 dataframe.at[idx, 'species_category'] = correct_name
                 break
 
+    return dataframe
+
+
+def correct_species_categories(dataframe):
+    for idx, name in dataframe['species_name'].items():
+        for correct_category, alias_list in maps.species_category_corrections.items():
+            if name in alias_list:
+                dataframe.at[idx, 'species_category'] = correct_category
+                break
     return dataframe
 
 
@@ -76,4 +85,6 @@ def clean_data(dataframe):
     dataframe = remove_columns(dataframe)
     dataframe = standardise_species_name(dataframe)
     dataframe = standardise_probability(dataframe)
-    return standardise_species_category(dataframe)
+    dataframe = standardise_species_category(dataframe)
+    dataframe = correct_species_categories(dataframe)
+    return dataframe
