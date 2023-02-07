@@ -91,13 +91,15 @@ def remove_bad_formatting(airdata_lookup):
     """Removes entries where the kml filename has a strange format with index, this should be fixed on the backend"""
     string_indices = []
     list_indices = []
+    string_count = 0
     for idx, kml_matches_list in airdata_lookup['kml_matches'].items():
         if isinstance(kml_matches_list, str) and '[' in kml_matches_list:
             airdata_lookup.at[idx, 'kml_matches'] = literal_eval(kml_matches_list)
             list_indices.append(idx)
         elif isinstance(kml_matches_list, str):
             string_indices.append(idx)
-
+            string_count += 1
+    print(f'string count: {string_count}')
     return airdata_lookup.filter(items=list_indices, axis=0)
 
 
@@ -106,6 +108,7 @@ def add_kml_key(airdata_lookup):
     kml_lookup = pd.read_csv(os.path.join(NEW_DATABASE_DIRECTORY, 'kml_lookup.csv'))
     kmlIDs = []
     kml_filename_list = kml_lookup['filename'].to_list()
+    sum = 0
     for idx, kml_matches_list in airdata_lookup['kml_matches'].items():
         # Check if the first kml file listed has a key
         if isinstance(kml_matches_list, list):
@@ -121,11 +124,12 @@ def add_kml_key(airdata_lookup):
                 # If the kml filename doesn't have a key in the kml_lookup table, assign it the na key
                 na_index = kml_lookup.index[kml_lookup['filename'].isna()][0]
                 kmlIDs.append(na_index)
+                sum += 1
         else:
             # If this entry is not a list, assign it the na key
             na_index = kml_lookup.index[kml_lookup['filename'].isna()][0]
             kmlIDs.append(na_index)
-
+    print(f'sum: {sum}')
     airdata_lookup['kmlID'] = kmlIDs
     airdata_lookup = airdata_lookup.drop(columns='kml_matches')
     return airdata_lookup
