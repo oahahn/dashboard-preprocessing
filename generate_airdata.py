@@ -28,12 +28,12 @@ def generate_airdata(kml_lookup):
     # Reorder the columns to have the primary key in the first position and export
     airdata = airdata[['airdataID', 'filename', 'air_seconds', 'video_length', 'kml_area',
                                      'kml_matches', 'surveyID']]
-    airdata = remove_bad_formatting(airdata)
-    airdata = add_kml_key(airdata, kml_lookup)
+    airdata = clean_kml_column(airdata)
+    airdata = add_kml_key(airdata, 'kml_matches', kml_lookup)
     airdata.to_csv(os.path.join(NEW_DATABASE_DIRECTORY, 'airdata.csv'), index=False)
 
 
-def remove_bad_formatting(airdata):
+def clean_kml_column(airdata):
     """Removes entries where the kml filename has a strange format with index"""
     for idx, kml_matches_list in airdata['kml_matches'].items():
         if isinstance(kml_matches_list, str) and '[' in kml_matches_list:
@@ -43,12 +43,12 @@ def remove_bad_formatting(airdata):
     return airdata
 
 
-def add_kml_key(airdata, kml_lookup):
+def add_kml_key(dataframe, kml_column_name, kml_lookup_table):
     """Replaces the kml filename lists with the kml keys from the kml_lookup table"""
     kmlIDs = []
-    na_index = kml_lookup.index[kml_lookup['filename'].isna()][0]
-    kml_filename_list = kml_lookup['filename'].to_list()
-    for idx, kml_matches_list in airdata['kml_matches'].items():
+    na_index = kml_lookup_table.index[kml_lookup_table['filename'].isna()][0]
+    kml_filename_list = kml_lookup_table['filename'].to_list()
+    for idx, kml_matches_list in dataframe[kml_column_name].items():
         # Check if the first kml file listed has a key
         if isinstance(kml_matches_list, list):
             # Look through list of filenames to try associate a kml key with the list
@@ -56,7 +56,7 @@ def add_kml_key(airdata, kml_lookup):
             for kml_filename in kml_matches_list:
                 if kml_filename in kml_filename_list:
                     kml_idx = kml_filename_list.index(kml_filename)
-                    kmlIDs.append(kml_lookup.at[kml_idx, 'kmlID'])
+                    kmlIDs.append(kml_lookup_table.at[kml_idx, 'kmlID'])
                     filename_key_not_found = False
                     break
             if filename_key_not_found:
@@ -65,6 +65,6 @@ def add_kml_key(airdata, kml_lookup):
         else:
             # If this entry is not a list, assign it the na key
             kmlIDs.append(na_index)
-    airdata['kmlID'] = kmlIDs
-    airdata = airdata.drop(columns='kml_matches')
-    return airdata
+    dataframe['kmlID'] = kmlIDs
+    dataframe = dataframe.drop(columns=kml_column_name)
+    return dataframe
