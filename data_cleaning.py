@@ -19,7 +19,6 @@ def remove_columns(dataframe):
     drop_columns.remove('species_name')
     return dataframe.drop(columns=drop_columns)
 
-
 def standardise_species_name(dataframe):
     # Strip text, remove underscores and add capitalised first letters
     dataframe['species_name'] = dataframe['species_name'].str.strip()
