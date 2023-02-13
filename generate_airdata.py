@@ -25,11 +25,6 @@ def generate_airdata(kml_lookup):
     airdata = airdata.drop(columns=['flight_start', 'flight_end'])
     # Create a primary key
     airdata['airdataID'] = np.arange(len(airdata))
-    # Create a primary key with a null index
-    # airdata['airdataID'] = np.arange(1, len(airdata) + 1)
-    # null_id = pd.DataFrame({'airdataID': 0, 'filename': np.nan, 'air_seconds': np.nan, 'kml_area': np.nan,
-    #                         'kml_matches': np.nan, 'video_length': np.nan, 'surveyID': np.nan}, index=[0])
-    # airdata = pd.concat([null_id, airdata], ignore_index=True)
     # Reorder the columns to have the primary key in the first position and export
     airdata = airdata[['airdataID', 'filename', 'air_seconds', 'video_length', 'kml_area',
                                      'kml_matches', 'surveyID']]
