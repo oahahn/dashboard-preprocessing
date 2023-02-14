@@ -9,7 +9,7 @@ def select_relevant_columns(det_match):
         'probability': det_match['probability'],
         'detection_count': det_match['detection_count'],
         'latitude': det_match['drone_lat'],
-        'longitude': det_match['drone_lat'],
+        'longitude': det_match['drone_lon'],
         'surveyID': det_match['surveyID'],
         'KML': det_match['KML'],
         'species_category': det_match['species_category'],
@@ -78,10 +78,28 @@ def correct_species_categories(detections):
     return detections
 
 
+def remove_geographic_outliers(detections):
+    # Cycle through the latitude and longitude columns and search for coordinates outside NSW
+    remove_indices = []
+    for idx, row in detections.iterrows():
+        latitude_outside_nsw = (row['latitude'] < -37.505768) or (row['latitude'] > -28.156804)
+        negative_latitude_in_nsw = (-row['latitude'] > -37.505768) or (-row['latitude'] < -28.156804)
+        longitude_outside_nsw = (row['longitude'] < 140.993300) or (row['longitude'] > 153.638805)
+        # Some latitude coordinates were missing a minus sign
+        if latitude_outside_nsw and negative_latitude_in_nsw:
+            detections.at[idx, 'latitude'] = -row['latitude']
+        elif latitude_outside_nsw or longitude_outside_nsw:
+            remove_indices.append(idx)
+
+    # Remove vague detections
+    return detections.drop(index=remove_indices)
+
+
 def clean_data(det_match):
     detections = select_relevant_columns(det_match)
     detections = standardise_species_name(detections)
     detections = standardise_probability(detections)
     detections = standardise_species_category(detections)
     detections = correct_species_categories(detections)
+    detections = remove_geographic_outliers(detections)
     return detections
