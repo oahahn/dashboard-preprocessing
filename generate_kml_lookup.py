@@ -2,12 +2,9 @@ import pandas as pd
 import numpy as np
 import os
 
-OLD_DATABASE_DIRECTORY = './CSVs'
-NEW_DATABASE_DIRECTORY = './databases'
 
-
-def generate_kml_lookup(detections):
-    kml_matches = pd.read_csv(os.path.join(OLD_DATABASE_DIRECTORY, 'kml_matches.csv'))
+def generate_kml_lookup(detections, old_csvs, new_csvs):
+    kml_matches = pd.read_csv(os.path.join(old_csvs, 'kml_matches.csv'))
     kml_lookup = kml_matches[['filename', 'flight_distance', 'flight_time (h)']]
     # Remove KML files that weren't flown
     kml_lookup = kml_lookup[kml_lookup['flight_time (h)'] != 0]
@@ -18,7 +15,7 @@ def generate_kml_lookup(detections):
     kml_lookup = pd.concat([null_id, kml_lookup], ignore_index=True)
     # Reorder the columns to have the primary key in the first position and export
     kml_lookup = kml_lookup[['kmlID', 'filename', 'flight_distance', 'flight_time (h)']]
-    kml_lookup.to_csv(os.path.join(NEW_DATABASE_DIRECTORY, 'kml_lookup.csv'), index=False)
+    kml_lookup.to_csv(os.path.join(new_csvs, 'kml_lookup.csv'), index=False)
     detections = add_kml_key_to_detections(detections, kml_lookup)
     return detections, kml_lookup
 

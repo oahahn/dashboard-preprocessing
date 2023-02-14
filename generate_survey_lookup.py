@@ -4,19 +4,16 @@ import os
 from ast import literal_eval
 from generate_airdata import add_kml_key
 
-OLD_DATABASE_DIRECTORY = './CSVs'
-NEW_DATABASE_DIRECTORY = './databases'
 
-
-def generate_survey_lookup(kml_lookup):
-    survey_match = pd.read_csv(os.path.join(OLD_DATABASE_DIRECTORY, 'survey_match.csv'))
+def generate_survey_lookup(kml_lookup, old_csvs, new_csvs):
+    survey_match = pd.read_csv(os.path.join(old_csvs, 'survey_match.csv'))
     # Filter relevant columns
     survey_lookup = survey_match[['surveyID', 'KMLs', 'pilot', 'client', 'mission']]
     # Drop duplicate surveyID entries
     survey_lookup = survey_lookup.drop_duplicates(subset=['surveyID'])
     survey_lookup = clean_kml_column(survey_lookup)
     survey_lookup = add_kml_key(survey_lookup, 'KMLs', kml_lookup)
-    survey_lookup.to_csv(os.path.join(NEW_DATABASE_DIRECTORY, 'survey_lookup.csv'), index=False)
+    survey_lookup.to_csv(os.path.join(new_csvs, 'survey_lookup.csv'), index=False)
 
 
 def clean_kml_column(survey_lookup):

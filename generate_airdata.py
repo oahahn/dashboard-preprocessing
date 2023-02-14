@@ -3,12 +3,9 @@ import numpy as np
 import os
 from ast import literal_eval
 
-OLD_DATABASE_DIRECTORY = './CSVs'
-NEW_DATABASE_DIRECTORY = './databases'
 
-
-def generate_airdata(kml_lookup):
-    airdata_matches = pd.read_csv(os.path.join(OLD_DATABASE_DIRECTORY, 'airdata_matches.csv'))
+def generate_airdata(kml_lookup, old_csvs, new_csvs):
+    airdata_matches = pd.read_csv(os.path.join(old_csvs, 'airdata_matches.csv'))
     # Extract the relevant columns
     airdata = pd.DataFrame({
         'flight_start': airdata_matches['flight_start'],
@@ -30,7 +27,7 @@ def generate_airdata(kml_lookup):
                                      'kml_matches', 'surveyID']]
     airdata = clean_kml_column(airdata)
     airdata = add_kml_key(airdata, 'kml_matches', kml_lookup)
-    airdata.to_csv(os.path.join(NEW_DATABASE_DIRECTORY, 'airdata.csv'), index=False)
+    airdata.to_csv(os.path.join(new_csvs, 'airdata.csv'), index=False)
 
 
 def clean_kml_column(airdata):
