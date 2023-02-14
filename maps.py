@@ -95,7 +95,7 @@ species_name_map = {
                     'Occupied Hollow (In Fallen Stag)', 'Hollow'],
     'Unknown': ['Unknown - Not A Koala', 'Unknown (X2)', 'Unknown (Fast?)', 'Unknown, Small', 'Unvalidated',
                 'Validate Not Found', 'Small Mammal (X3)', '2X Small Mammal', 'Small Mammal', 'Small Mammal (X2)',
-                'Small Unknown', 'Small Mammal Sp', 'Smmall Mammal', 'Canopy', 'Mammal', 'Small Detection', 'Low'],
+                'Small Unknown', 'Small Mammal Sp', 'Smmall Mammal', 'Canopy', 'Mammal', 'Small Detection', 'Low', ''],
     'Yellow-bellied Glider': ['Glider (Prob Yellow-Bellied)',
                               'Several Gliders/ Possums. 4 Probable Yellow-Bellied Gliders? Below (One Seen In Flight) Plus One Sugar Glider At Eye Level',
                               'Yellow-Bellied Glider', 'Yellow Belly Glider', 'Yellow Glider'],
