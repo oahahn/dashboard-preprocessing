@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 import os
 
-OLD_DATABASE_DIRECTORY = './old-csvs'
-NEW_DATABASE_DIRECTORY = './new-csvs'
 
 def generate_species_lookup(detections, new_csvs):
     # Create a new database with a list of unqiue species names
