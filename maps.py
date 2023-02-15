@@ -95,7 +95,8 @@ species_name_map = {
                     'Occupied Hollow (In Fallen Stag)', 'Hollow'],
     'Unknown': ['Unknown - Not A Koala', 'Unknown (X2)', 'Unknown (Fast?)', 'Unknown, Small', 'Unvalidated',
                 'Validate Not Found', 'Small Mammal (X3)', '2X Small Mammal', 'Small Mammal', 'Small Mammal (X2)',
-                'Small Unknown', 'Small Mammal Sp', 'Smmall Mammal', 'Canopy', 'Mammal', 'Small Detection', 'Low', ''],
+                'Small Unknown', 'Small Mammal Sp', 'Smmall Mammal', 'Canopy', 'Mammal', 'Small Detection', 'Low',
+                '', 'nan', 'NaN'],
     'Yellow-bellied Glider': ['Glider (Prob Yellow-Bellied)',
                               'Several Gliders/ Possums. 4 Probable Yellow-Bellied Gliders? Below (One Seen In Flight) Plus One Sugar Glider At Eye Level',
                               'Yellow-Bellied Glider', 'Yellow Belly Glider', 'Yellow Glider'],
@@ -140,7 +141,7 @@ species_category_map = {
     'Glider': ['Glider', 'Greater Glider', 'Sugar Glider'],
     'Ground Species': ['Deer', 'Ground', 'Ground?', 'Wombat'],
     'None': ['Hollow', 'No Detection', 'Other', 'Other - Add Details In Notes', 'Stag Hollow', 'Uncertain', 'Unknown',
-             'Unsure', 'nan', 'Both'],
+             'Unsure', 'nan', 'Both', 'NaN', ''],
     'Possum': ['Brush Tail', 'Ring Tail']
 }
 
@@ -152,4 +153,27 @@ species_category_corrections = {
     'Glider': ['Kreffts Glider', 'Yellow-bellied Glider'],
     'Macropod': ['Potoroo', 'Pademelon'],
     'Possum': ['Mountain Brushtail Possum', 'Ringtail Possum', 'Short-eared Possum'],
+}
+
+null_species_category_corrections = {
+    'Common Brushtail Possum': 'Possum',
+    'Possum': 'Possum',
+    'Common Ringtail Possum': 'Possum',
+    'Deer': 'Ground Species',
+    'Macropod': 'Macropod',
+    'Unknown': 'None',
+    'Tree Hollow': 'None',
+    'Bird': 'Aerial Species',
+    'Koala': 'Koala',
+    'Wallaby': 'Macropod',
+    'Glider': 'Glider',
+    'Sugar Glider': 'Glider',
+    'Horse': 'Ground Species',
+    'Quoll': 'Ground Species',
+    'Goat': 'Ground Species',
+    'Rabbit': 'Ground Species',
+    'Wombat': 'Ground Species',
+    'Pig': 'Ground Species',
+    'Swamp Wallaby': 'Macropod',
+    'Owl': 'Aerial Species'
 }

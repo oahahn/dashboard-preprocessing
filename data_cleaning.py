@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 import maps
@@ -78,6 +79,17 @@ def correct_species_categories(detections):
     return detections
 
 
+def fill_in_null_values(detections):
+    for idx, row in detections.iterrows():
+        if not isinstance(row['species_category'], str) and isinstance(row['species_name'], str):
+            try:
+                species_category = maps.null_species_category_corrections[row['species_name']]
+                detections.at[idx, 'species_category'] = species_category
+            except:
+                print("Spceies name not present in maps.null_species_category_corrections")
+    return detections
+
+
 def remove_geographic_outliers(detections):
     # Cycle through the latitude and longitude columns and search for coordinates outside NSW
     remove_indices = []
@@ -101,5 +113,6 @@ def clean_data(det_match):
     detections = standardise_probability(detections)
     detections = standardise_species_category(detections)
     detections = correct_species_categories(detections)
+    detections = fill_in_null_values(detections)
     detections = remove_geographic_outliers(detections)
     return detections
