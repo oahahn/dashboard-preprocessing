@@ -60,7 +60,7 @@ def standardise_species_category(detections):
     detections['species_category'] = detections['species_category'].str.title()
     detections['species_category'] = detections['species_category'].str.replace('_', ' ')
 
-    # Cycle through the probability column and correct alternate spelling
+    # Cycle through the species category column and correct alternate spelling
     for idx, name in detections['species_category'].items():
         for correct_name, alias_list in maps.species_category_map.items():
             if name in alias_list:
@@ -83,12 +83,36 @@ def correct_species_categories(detections):
 def fill_in_null_values(detections):
     # Fills in categories that are recorded as null, which have an associated species name
     for idx, row in detections.iterrows():
-        if not isinstance(row['species_category'], str) and isinstance(row['species_name'], str):
+        category = row['species_category']
+        name = row['species_name']
+        category_null_name_present = (not isinstance(category, str)) and isinstance(name, str)
+        identified_species_name = (name != 'Unspecified')
+        if category_null_name_present and identified_species_name:
             try:
-                species_category = maps.null_species_category_corrections[row['species_name']]
+                species_category = maps.null_species_category_corrections[name]
                 detections.at[idx, 'species_category'] = species_category
             except:
-                print("Species name not present in the null_species_category_corrections dictionary in maps.py")
+                print(f"Species name '{row['species_name']}' not present in the null_species_category_corrections "
+                      f"dictionary in maps.py")
+    return detections
+
+
+def add_unspecified_labels(detections):
+    # If a pilot has labelled a detection with a general species category, this fills in the species name as unspecified
+    select_species = ['Possum', 'Macropod', 'Ground Species', 'Glider', 'Arboreal Species', 'Aerial Species']
+    unspecified_values = np.where((detections['species_name'] == detections['species_category'])
+                                  & detections['species_category'].isin(select_species))
+    unspecified_df = detections.iloc[unspecified_values]
+    unspecified_df.to_csv('unspecified_df.csv')
+    for idx, row in detections.iterrows():
+        category = row['species_category']
+        name = row['species_name']
+        if (name == category) and (category in select_species):
+            detections.at[idx, 'species_name'] = 'Unspecified ' + name
+    unspecified_values_after = np.where((detections['species_name'] == 'Possum')
+                                        & detections['species_category'] == 'Arboreal Species')
+    unspecified_after_df = detections.iloc[unspecified_values_after]
+    unspecified_after_df.to_csv('unspecified_after_df.csv')
     return detections
 
 
@@ -116,5 +140,6 @@ def clean_data(det_match):
     detections = standardise_species_category(detections)
     detections = correct_species_categories(detections)
     detections = fill_in_null_values(detections)
+    detections = add_unspecified_labels(detections)
     detections = remove_geographic_outliers(detections)
     return detections
