@@ -71,6 +71,7 @@ def standardise_species_category(detections):
 
 
 def correct_species_categories(detections):
+    # Goes through the species names and makes sure they are properly categorised
     for idx, name in detections['species_name'].items():
         for correct_category, alias_list in maps.species_category_corrections.items():
             if name in alias_list:
@@ -80,13 +81,14 @@ def correct_species_categories(detections):
 
 
 def fill_in_null_values(detections):
+    # Fills in categories that are recorded as null, which have an associated species name
     for idx, row in detections.iterrows():
         if not isinstance(row['species_category'], str) and isinstance(row['species_name'], str):
             try:
                 species_category = maps.null_species_category_corrections[row['species_name']]
                 detections.at[idx, 'species_category'] = species_category
             except:
-                print("Spceies name not present in maps.null_species_category_corrections")
+                print("Species name not present in the null_species_category_corrections dictionary in maps.py")
     return detections
 
 
