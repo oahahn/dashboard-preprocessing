@@ -27,6 +27,7 @@ def generate_airdata(kml_lookup, old_csvs, new_csvs):
                                      'kml_matches', 'surveyID']]
     airdata = clean_kml_column(airdata)
     airdata = add_kml_key(airdata, 'kml_matches', kml_lookup)
+    # airdata['kml_area'] = pd.to_numeric(airdata['kml_area'])
     airdata.to_csv(os.path.join(new_csvs, 'airdata.csv'), index=False)
 
 
