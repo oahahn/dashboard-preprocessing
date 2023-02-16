@@ -99,20 +99,9 @@ def fill_in_null_values(detections):
 
 def add_unspecified_labels(detections):
     # If a pilot has labelled a detection with a general species category, this fills in the species name as unspecified
-    select_species = ['Possum', 'Macropod', 'Ground Species', 'Glider', 'Arboreal Species', 'Aerial Species']
-    unspecified_values = np.where((detections['species_name'] == detections['species_category'])
-                                  & detections['species_category'].isin(select_species))
-    unspecified_df = detections.iloc[unspecified_values]
-    unspecified_df.to_csv('unspecified_df.csv')
-    for idx, row in detections.iterrows():
-        category = row['species_category']
-        name = row['species_name']
-        if (name == category) and (category in select_species):
+    for idx, name in detections['species_name'].items():
+        if name in maps.unspecifieed_species:
             detections.at[idx, 'species_name'] = 'Unspecified ' + name
-    unspecified_values_after = np.where((detections['species_name'] == 'Possum')
-                                        & detections['species_category'] == 'Arboreal Species')
-    unspecified_after_df = detections.iloc[unspecified_values_after]
-    unspecified_after_df.to_csv('unspecified_after_df.csv')
     return detections
 
 
