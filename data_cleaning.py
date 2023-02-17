@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import maps
 
 
@@ -120,6 +121,18 @@ def remove_geographic_outliers(detections):
     return detections.drop(index=remove_indices)
 
 
+def remove_null_rows(detections):
+    # Drops rows where both species name and category are null
+    rows_to_drop = []
+    for idx, row in detections.iterrows():
+        species_name_null = not isinstance(row['species_name'], str)
+        species_category_null = not isinstance(row['species_category'], str)
+        if species_name_null and species_category_null:
+            rows_to_drop.append(idx)
+
+    return detections.drop(index=rows_to_drop)
+
+
 def clean_data(det_match):
     detections = select_relevant_columns(det_match)
     detections = standardise_species_name(detections)
@@ -129,4 +142,5 @@ def clean_data(det_match):
     detections = fill_in_null_values(detections)
     detections = add_unspecified_labels(detections)
     detections = remove_geographic_outliers(detections)
+    detections = remove_null_rows(detections)
     return detections
