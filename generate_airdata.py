@@ -12,9 +12,9 @@ def generate_airdata(kml_lookup, old_csvs, new_csvs):
         'flight_end': airdata_matches['flight_end'],
         'filename': airdata_matches['filename'],
         'air_seconds': airdata_matches['Air Seconds'],
-        'kml_area': airdata_matches['kml_area'],
+        'kml_area (m^2)': airdata_matches['kml_area(m^2)'],
         'kml_matches': airdata_matches['kml_matches'],
-        'video_length': airdata_matches['viedo_length'],
+        'video_length (s)': airdata_matches['video_length(s)'],
         'surveyID': airdata_matches['surveyID']
     })
     # Drop any entries which start and end at the same time on the same date to ensure unique entries
@@ -23,7 +23,7 @@ def generate_airdata(kml_lookup, old_csvs, new_csvs):
     # Create a primary key
     airdata['airdataID'] = np.arange(len(airdata))
     # Reorder the columns to have the primary key in the first position and export
-    airdata = airdata[['airdataID', 'filename', 'air_seconds', 'video_length', 'kml_area',
+    airdata = airdata[['airdataID', 'filename', 'air_seconds', 'video_length (s)', 'kml_area (m^2)',
                                      'kml_matches', 'surveyID']]
     airdata = clean_kml_column(airdata)
     airdata = add_kml_key(airdata, 'kml_matches', kml_lookup)
