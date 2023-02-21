@@ -123,7 +123,7 @@ species_name_map = {
                'Macropods And Wombat (3 Animals)', 'Wombat/ Deer?', 'Wombat?', 'Wombat Or Deer?',
                'Uncertain, Maybe Wombat', 'Pig Or Wombat', 'Unknown (Wombat)', 'Wombat (X2)',
                'Wombat And Small Unidentified Ground'],
-    'no_detection': ['ns west start terrible reception, difficult to descend for closer inspection', 'dummy'],
+    'no_detection': ['ns west start terrible reception, difficult to descend for closer inspection', 'dummy', 'no detection'],
 }
 
 to_remove = ['Dummy', 'Human', 'Bulge On Branch', 'Human', 'No Detection', 'Uncertain',
