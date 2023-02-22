@@ -10,6 +10,10 @@ def generate_kml_lookup(detections, old_csvs, new_csvs):
         'flight_distance': kml_matches['flight_distance'],
         'flight_time (h)': kml_matches['flight_time (h)'],
         'kml_area (m^2)': kml_matches['kml_area(m^2)'],
+        'lat_min': kml_matches['lat_min'],
+        'lat_max': kml_matches['lat_max'],
+        'lon_min': kml_matches['lon_min'],
+        'lon_max': kml_matches['lon_max'],
     })
     # Remove KML files that weren't flown
     kml_lookup = kml_lookup[kml_lookup['flight_time (h)'] != 0]
@@ -19,7 +23,8 @@ def generate_kml_lookup(detections, old_csvs, new_csvs):
                             'kml_area (m^2)': np.nan}, index=[0])
     kml_lookup = pd.concat([null_id, kml_lookup], ignore_index=True)
     # Reorder the columns to have the primary key in the first position and export
-    kml_lookup = kml_lookup[['kmlID', 'filename', 'flight_distance', 'flight_time (h)', 'kml_area (m^2)']]
+    kml_lookup = kml_lookup[['kmlID', 'filename', 'flight_distance', 'flight_time (h)', 'kml_area (m^2)', 'lat_min',
+                             'lat_max', 'lon_min', 'lon_max']]
     kml_lookup.to_csv(os.path.join(new_csvs, 'kml_lookup.csv'), index=False)
     detections = add_kml_key_to_detections(detections, kml_lookup)
     return detections, kml_lookup
