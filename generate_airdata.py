@@ -27,7 +27,7 @@ def generate_airdata(kml_lookup, old_csvs, new_csvs):
                                      'kml_matches', 'surveyID']]
     airdata = clean_kml_column(airdata)
     airdata = add_kml_key(airdata, 'kml_matches', kml_lookup)
-    # airdata['kml_area'] = pd.to_numeric(airdata['kml_area'])
+    airdata = clean_surveyID_column(airdata)
     airdata.to_csv(os.path.join(new_csvs, 'airdata.csv'), index=False)
 
 
@@ -66,3 +66,11 @@ def add_kml_key(dataframe, kml_column_name, kml_lookup_table):
     dataframe['kmlID'] = kmlIDs
     dataframe = dataframe.drop(columns=kml_column_name)
     return dataframe
+
+
+def clean_surveyID_column(airdata):
+    """Removes entries where the kml filename has a strange format with index"""
+    for idx, surveyID_list in airdata['surveyID'].items():
+        if isinstance(surveyID_list, str) and '[' in surveyID_list:
+            airdata.at[idx, 'surveyID'] = literal_eval(surveyID_list)[0]
+    return airdata

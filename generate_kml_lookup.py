@@ -29,8 +29,7 @@ def generate_kml_lookup(detections, survey_lookup, old_csvs, new_csvs):
                              'lat_max', 'lon_min', 'lon_max']]
     kml_lookup = associate_kmls_with_surveys(detections, survey_lookup, kml_lookup)
     kml_lookup.to_csv(os.path.join(new_csvs, 'kml_lookup.csv'), index=False)
-    detections = add_kml_key_to_detections(detections, kml_lookup)
-    return detections
+    return detections, kml_lookup
 
 
 def associate_kmls_with_surveys(detections, survey_lookup, kml_lookup):
