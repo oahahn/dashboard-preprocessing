@@ -1,9 +1,11 @@
 import pandas as pd
 import numpy as np
 import os
+from ast import literal_eval
 
 
-def generate_kml_lookup(detections, old_csvs, new_csvs):
+def generate_kml_lookup(detections, survey_lookup, old_csvs, new_csvs):
+    detections.to_csv('detections_tmp.csv')
     kml_matches = pd.read_csv(os.path.join(old_csvs, 'kml_matches.csv'))
     kml_lookup = pd.DataFrame({
         'filename': kml_matches['filename'],
@@ -25,14 +27,44 @@ def generate_kml_lookup(detections, old_csvs, new_csvs):
     # Reorder the columns to have the primary key in the first position and export
     kml_lookup = kml_lookup[['kmlID', 'filename', 'flight_distance', 'flight_time (h)', 'kml_area (m^2)', 'lat_min',
                              'lat_max', 'lon_min', 'lon_max']]
+    kml_lookup = associate_kmls_with_surveys(detections, survey_lookup, kml_lookup)
     kml_lookup.to_csv(os.path.join(new_csvs, 'kml_lookup.csv'), index=False)
     detections = add_kml_key_to_detections(detections, kml_lookup)
-    return detections, kml_lookup
-
-
-def add_kml_key_to_detections(detections, kml_lookup):
-    # Add in the KML ID key to the original detections database
-    detections = pd.merge(detections, kml_lookup, left_on='KML', right_on='filename', validate='many_to_one')
-    # Remove species category and species name from detections database
-    detections = detections.drop(columns=['KML', 'filename', 'flight_distance', 'flight_time (h)'])
     return detections
+
+
+def associate_kmls_with_surveys(detections, survey_lookup, kml_lookup):
+    # Go through each KML file and associate a surveyID with it
+    surveyID_list = []
+    for kml_filename in kml_lookup['filename'].values:
+        filename_key_not_found = True
+        for idx, row in survey_lookup.iterrows():
+            kml_list = row['KMLs']
+            surveyID = row['surveyID']
+            if isinstance(kml_list, list) and kml_filename in kml_list:
+                surveyID_list.append(surveyID)
+                filename_key_not_found = False
+                break
+        # If no surveyID was found, assign null
+        if filename_key_not_found:
+            surveyID_list.append(np.nan)
+    kml_lookup['surveyID'] = surveyID_list
+
+    # Fill in null values: look for kml_lookup surveyID keys which are null and try and find a key to fit the entry
+    for idx, row in kml_lookup.iterrows():
+        surveyID = row['surveyID']
+        kml_filename = row['filename']
+        if pd.isnull(surveyID) and pd.notnull(kml_filename):
+            kml_lookup.at[idx, 'surveyID'] = get_surveyID_from_detections(detections, kml_filename)
+    return kml_lookup
+
+
+def get_surveyID_from_detections(detections, kml_filename):
+    # Look through the detections database to associate a kml filename with a surveyID key
+    for i, kml_matches in detections['kml_matches'].items():
+        list_type = isinstance(kml_matches, str) and '[' in kml_matches
+        # If the kml exists in the kml_matches list from detections, use this surveyID key
+        if list_type and (kml_filename in literal_eval(kml_matches)):
+            return detections.at[i, 'surveyID']
+    # If none can be found, keep the entry null
+    return np.nan

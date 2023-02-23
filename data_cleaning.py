@@ -12,6 +12,7 @@ def select_relevant_columns(det_match):
         'longitude': det_match['drone_lon'],
         'surveyID': det_match['surveyID'],
         'KML': det_match['KML'],
+        'kml_matches': det_match['kml_matches'],
         'species_category': det_match['species_category'],
         'species_name': det_match['species_name']
     })
