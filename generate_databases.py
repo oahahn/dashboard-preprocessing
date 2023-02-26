@@ -21,7 +21,9 @@ def generate_databases(args):
     detections, species_lookup = generate_species_lookup(detections, args.new_csv_dir)
     survey_lookup = generate_survey_lookup(args.old_csv_dir, args.new_csv_dir)
     detections, kml_lookup = generate_kml_lookup(detections, survey_lookup, args.old_csv_dir, args.new_csv_dir)
-    generate_detections(detections, kml_lookup, args.new_csv_dir)
+    detections = generate_detections(detections, kml_lookup)
+    detections = generate_date_lookup(detections, args.new_csv_dir)
+    detections.to_csv(os.path.join(args.new_csv_dir, 'detections.csv'), index=False)
 
 
 

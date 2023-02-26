@@ -1,10 +1,11 @@
 import pandas as pd
 import os
 
-def generate_detections(detections, kml_lookup, new_csvs):
+
+def generate_detections(detections, kml_lookup):
     detections = add_kml_key_to_detections(detections, kml_lookup)
     detections = add_coarse_probability_column(detections)
-    detections.to_csv(os.path.join(new_csvs, 'detections.csv'), index=False)
+    return detections
 
 
 def add_kml_key_to_detections(detections, kml_lookup):

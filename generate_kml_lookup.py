@@ -5,7 +5,6 @@ from ast import literal_eval
 
 
 def generate_kml_lookup(detections, survey_lookup, old_csvs, new_csvs):
-    detections.to_csv('detections_tmp.csv')
     kml_matches = pd.read_csv(os.path.join(old_csvs, 'kml_matches.csv'))
     kml_lookup = pd.DataFrame({
         'filename': kml_matches['filename'],
