@@ -6,7 +6,6 @@ This repo contains a collection of preprocessing methods to clean and organise d
 
 In order to run the preprocessing, you need a folder containing the following databases:
 
-* airdata_matches.csv
 * det_match.csv
 * kml_matches.csv
 * survey_match.csv
