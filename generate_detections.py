@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 
 
 def generate_detections(detections, kml_lookup):

@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import os
 from ast import literal_eval
-from generate_airdata import add_kml_key
 
 
 def generate_survey_lookup(old_csvs, new_csvs):

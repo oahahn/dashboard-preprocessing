@@ -2,7 +2,6 @@ import pandas as pd
 from data_cleaning import clean_data
 from generate_species_lookup import generate_species_lookup
 from generate_kml_lookup import generate_kml_lookup
-from generate_airdata import generate_airdata
 from generate_survey_lookup import generate_survey_lookup
 from generate_date_lookup import generate_date_lookup
 from generate_detections import generate_detections
@@ -24,7 +23,6 @@ def generate_databases(args):
     detections = generate_detections(detections, kml_lookup)
     detections = generate_date_lookup(detections, args.new_csv_dir)
     detections.to_csv(os.path.join(args.new_csv_dir, 'detections.csv'), index=False)
-
 
 
 if __name__ == '__main__':
