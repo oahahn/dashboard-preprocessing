@@ -1,9 +1,12 @@
 import pandas as pd
+import numpy as np
 
 
 def generate_detections(detections, kml_lookup):
     detections = add_kml_key_to_detections(detections, kml_lookup)
     detections = add_coarse_probability_column(detections)
+    detections['date'] = pd.to_datetime(detections['date'], format='%Y/%m/%d')
+    detections['cumulative_count'] = np.cumsum(detections.sort_values(by='date')['detection_count'])
     return detections
 
 
