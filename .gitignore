@@ -4,3 +4,4 @@ __pycache__
 *.csv
 install-packages
 temp.py
+other-databases/koala-sightings.txt
