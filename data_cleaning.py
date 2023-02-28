@@ -1,6 +1,20 @@
 import pandas as pd
-import numpy as np
 import maps
+import os
+
+
+def clean_data(old_csvs):
+    det_match = pd.read_csv(os.path.join(old_csvs, 'det_match.csv'))
+    detections = select_relevant_columns(det_match)
+    detections = standardise_species_name(detections)
+    detections = standardise_probability(detections)
+    detections = standardise_species_category(detections)
+    detections = correct_species_categories(detections)
+    detections = fill_in_null_values(detections)
+    detections = add_unspecified_labels(detections)
+    detections = remove_geographic_outliers(detections)
+    detections = remove_null_rows(detections)
+    return detections
 
 
 def select_relevant_columns(det_match):
@@ -131,16 +145,3 @@ def remove_null_rows(detections):
         if species_null or detection_time_null:
             rows_to_drop.append(idx)
     return detections.drop(index=rows_to_drop)
-
-
-def clean_data(det_match):
-    detections = select_relevant_columns(det_match)
-    detections = standardise_species_name(detections)
-    detections = standardise_probability(detections)
-    detections = standardise_species_category(detections)
-    detections = correct_species_categories(detections)
-    detections = fill_in_null_values(detections)
-    detections = add_unspecified_labels(detections)
-    detections = remove_geographic_outliers(detections)
-    detections = remove_null_rows(detections)
-    return detections
