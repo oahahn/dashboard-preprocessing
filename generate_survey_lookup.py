@@ -14,12 +14,14 @@ def generate_survey_lookup(old_csvs, new_csvs):
         'client': survey_match['client'],
         'mission': survey_match['mission'],
         'video_length (s)': survey_match['video_length(s)'],
+        'date': survey_match['survey_start']
     })
     # Drop duplicate surveyID entries
     survey_lookup = survey_lookup.drop_duplicates(subset=['surveyID'])
     survey_lookup = clean_kml_column(survey_lookup)
     # survey_lookup = add_kml_key(survey_lookup, 'KMLs', kml_lookup)
     survey_lookup = remove_null_rows(survey_lookup)
+    survey_lookup['date'] = pd.to_datetime(survey_lookup['date']).dt.date
     survey_lookup.to_csv(os.path.join(new_csvs, 'survey_lookup.csv'), index=False)
     return survey_lookup
 
