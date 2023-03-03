@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 from ast import literal_eval
+import time
 
 
 def generate_survey_lookup(old_csvs, new_csvs):
@@ -38,10 +39,30 @@ def clean_kml_column(survey_lookup):
 
 
 def remove_null_rows(survey_lookup):
-    # Drops rows where mission is labelled '?'
+    """Drops rows where mission is labelled '?'"""
     rows_to_drop = []
     for idx, mission in survey_lookup['mission'].items():
         if mission == '?':
             rows_to_drop.append(idx)
 
     return survey_lookup.drop(index=rows_to_drop)
+
+
+def fill_in_dates(survey_lookup):
+    min_date = pd.to_datetime(survey_lookup['date']).dt.date.min()
+    max_date = pd.to_datetime(survey_lookup['date']).dt.date.axn()
+    for idx, date in survey_lookup['date'].items():
+        if pd.isnull(date):
+            survey_lookup.at[idx, 'date'] = generate_random_date()
+
+
+def generate_random_date(start, end):
+    """Get a random date between two dates"""
+    date_format = '%d/%m/%Y'
+    start_date = time.mktime(time.strptime(start, date_format))
+    end_date = time.mktime(time.strptime(end, date_format))
+    random_sample = np.random.beta(a=5, b=2)
+
+    ptime = start_date + random_sample * (end_date - start_date)
+
+    return time.strftime(date_format, time.localtime(ptime))
