@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import os
 from ast import literal_eval
-import time
 
 
 def generate_survey_lookup(old_csvs, new_csvs):
@@ -22,7 +21,6 @@ def generate_survey_lookup(old_csvs, new_csvs):
     survey_lookup = clean_kml_column(survey_lookup)
     # survey_lookup = add_kml_key(survey_lookup, 'KMLs', kml_lookup)
     survey_lookup = remove_null_rows(survey_lookup)
-    survey_lookup = fill_in_dates(survey_lookup)
     survey_lookup['date'] = pd.to_datetime(survey_lookup['date']).dt.date
     survey_lookup.to_csv(os.path.join(new_csvs, 'survey_lookup.csv'), index=False)
     return survey_lookup
@@ -47,28 +45,3 @@ def remove_null_rows(survey_lookup):
             rows_to_drop.append(idx)
 
     return survey_lookup.drop(index=rows_to_drop)
-
-
-def fill_in_dates(survey_lookup):
-    survey_lookup['date'] = pd.to_datetime(survey_lookup['date'])
-    for idx, date in survey_lookup['date'].items():
-        if pd.isnull(date):
-            survey_lookup.at[idx, 'date'] = generate_random_date()
-    return survey_lookup
-
-
-def generate_random_date():
-    """Get a random date between two dates"""
-    date_format = '%Y/%m/%d %H:%M:%S'
-    start = '2021/05/10 00:00:00'
-    end = '2022/12/21 00:00:00'
-    start_date = time.mktime(time.strptime(start, date_format))
-    end_date = time.mktime(time.strptime(end, date_format))
-    random_sample = np.random.beta(a=5, b=2)
-    # random_sample = np.random.random()
-
-    random_datetime = start_date + random_sample * (end_date - start_date)
-    random_strtime = time.strftime(date_format, time.localtime(random_datetime))
-    random_date = pd.to_datetime(random_strtime).date()
-
-    return random_strtime
