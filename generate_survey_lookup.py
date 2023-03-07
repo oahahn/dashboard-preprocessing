@@ -40,8 +40,7 @@ def clean_kml_column(survey_lookup):
 def remove_null_rows(survey_lookup):
     """Drops rows where mission is labelled '?'"""
     rows_to_drop = []
-    for idx, mission in survey_lookup['mission'].items():
-        if mission == '?':
+    for idx, row in survey_lookup.iterrows():
+        if row['mission'] == '?' or row['pilot'] == 'Test':
             rows_to_drop.append(idx)
-
     return survey_lookup.drop(index=rows_to_drop)

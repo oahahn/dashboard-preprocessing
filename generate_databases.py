@@ -6,6 +6,7 @@ from generate_survey_lookup import generate_survey_lookup
 from generate_date_lookup import generate_date_lookup
 from generate_detections import generate_detections
 from generate_video_lookup import generate_video_lookup
+from generate_individual_databases import generate_individual_databases
 
 import os
 import argparse
@@ -24,6 +25,7 @@ def generate_databases(args):
     detections = generate_date_lookup(detections, args.new_csv_dir)
     generate_video_lookup(args.old_csv_dir, args.new_csv_dir)
     detections.to_csv(os.path.join(args.new_csv_dir, 'detections.csv'), index=False)
+    generate_individual_databases(args.new_csv_dir, detections, survey_lookup)
 
 
 if __name__ == '__main__':
