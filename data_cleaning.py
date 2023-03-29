@@ -114,8 +114,10 @@ def fill_in_null_values(detections):
 def add_unspecified_labels(detections):
     # If a pilot has labelled a detection with a general species category, this fills in the species name as unspecified
     for idx, name in detections['species_name'].items():
-        if name in maps.unspecified_species:
-            detections.at[idx, 'species_name'] = 'Unspecified ' + name
+        if name in maps.add_species:
+            detections.at[idx, 'species_name'] = 'Other ' + name + ' Species'
+        elif name in maps.add_other:
+            detections.at[idx, 'species_name'] = 'Other ' + name
     return detections
 
 
