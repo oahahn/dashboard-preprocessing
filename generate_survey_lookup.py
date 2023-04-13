@@ -9,7 +9,7 @@ def generate_survey_lookup(old_csvs, new_csvs):
     # Filter relevant columns
     survey_lookup = pd.DataFrame({
         'surveyID': survey_match['surveyID'],
-        'KMLs': survey_match['KMLs'],
+        'KMLs': survey_match['kml_matches'],
         'pilot': survey_match['pilot'],
         'client': survey_match['client'],
         'mission': survey_match['mission'],
