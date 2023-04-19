@@ -14,7 +14,8 @@ def generate_survey_lookup(old_csvs, new_csvs):
         'client': survey_match['client'],
         'mission': survey_match['mission'],
         'video_length (s)': survey_match['video_length(s)'],
-        'date': survey_match['survey_start']
+        'date': survey_match['survey_start'],
+        'location_id': survey_match['location_id']
     })
     # Drop duplicate surveyID entries
     survey_lookup = survey_lookup.drop_duplicates(subset=['surveyID'])

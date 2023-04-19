@@ -12,6 +12,7 @@ def generate_kml_lookup(detections, survey_lookup, old_csvs, new_csvs):
         'flight_time (h)': kml_matches['flight_time (h)'],
         'kml_area (m^2)': kml_matches['kml_area(m^2)'],
         'date': kml_matches['detection_time'],
+        'location_id': kml_matches['location_id']
     })
     # Remove KML files that weren't flown
     kml_lookup = kml_lookup[kml_lookup['flight_time (h)'] != 0]

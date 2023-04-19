@@ -1,4 +1,3 @@
-import pandas as pd
 from data_cleaning import clean_data
 from generate_species_lookup import generate_species_lookup
 from generate_kml_lookup import generate_kml_lookup
@@ -6,7 +5,8 @@ from generate_survey_lookup import generate_survey_lookup
 from generate_date_lookup import generate_date_lookup
 from generate_detections import generate_detections
 from generate_video_lookup import generate_video_lookup
-from generate_individual_databases import generate_individual_databases
+from generate_pilot_lookup import generate_individual_databases
+from generate_location_lookup import generate_location_lookup
 
 import os
 import argparse
@@ -26,6 +26,7 @@ def generate_databases(args):
     generate_video_lookup(args.old_csv_dir, args.new_csv_dir)
     detections.to_csv(os.path.join(args.new_csv_dir, 'detections.csv'), index=False)
     generate_individual_databases(args.new_csv_dir, detections, survey_lookup)
+    generate_location_lookup(args.old_csv_dir, args.new_csv_dir)
 
 
 if __name__ == '__main__':

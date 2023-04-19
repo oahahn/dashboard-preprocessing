@@ -25,3 +25,4 @@ def add_coarse_probability_column(detections):
             coarse_probability_list.append('Other')
     detections['high_probability'] = coarse_probability_list
     return detections
+

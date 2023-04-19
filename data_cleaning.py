@@ -14,6 +14,7 @@ def clean_data(old_csvs):
     detections = add_unspecified_labels(detections)
     detections = remove_geographic_outliers(detections)
     detections = remove_null_rows(detections)
+    detections = remove_incorrect_dates(detections)
     return detections
 
 
@@ -28,7 +29,8 @@ def select_relevant_columns(det_match):
         'KML': det_match['KML'],
         'kml_matches': det_match['kml_matches'],
         'species_category': det_match['species_category'],
-        'species_name': det_match['species_name']
+        'species_name': det_match['species_name'],
+        'location_id': det_match['location_id']
     })
 
 
@@ -147,3 +149,14 @@ def remove_null_rows(detections):
         if species_null or detection_time_null:
             rows_to_drop.append(idx)
     return detections.drop(index=rows_to_drop)
+
+def remove_incorrect_dates(detections):
+    # Drops rows where the detection date is before the start of the project
+    rows_to_drop = []
+    for idx, row in detections.iterrows():
+        detection_date = pd.to_datetime(row['detection_time']).date()
+        incorrect_date = detection_date < pd.Timestamp(year=2020, month=1, day=1).date()
+        if incorrect_date:
+            rows_to_drop.append(idx)
+    return detections.drop(index=rows_to_drop)
+
