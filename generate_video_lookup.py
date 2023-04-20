@@ -8,14 +8,15 @@ def generate_video_lookup(old_csvs, new_csvs):
     video_lookup = pd.DataFrame({
         'date': pd.to_datetime(video_matches['creation_time']).dt.date,
         'file_size': video_matches['file_size'],
-        'duration': video_matches['duration']
+        'duration': video_matches['duration'],
+        'location_id': video_matches['kml_location_id']
     })
     video_lookup = remove_null_rows(video_lookup)
     video_lookup.to_csv(os.path.join(new_csvs, 'video_lookup.csv'), index=False)
 
 
 def remove_null_rows(video_lookup):
-    # Drops rows where date, file_size and duration are all null
+    # Drops rows where date or file_size are null
     rows_to_drop = []
     for idx, row in video_lookup.iterrows():
         if pd.isnull(row['date']) or pd.isnull(row['file_size']):

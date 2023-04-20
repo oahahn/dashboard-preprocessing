@@ -4,7 +4,7 @@ import os
 from ast import literal_eval
 
 
-def generate_survey_lookup(old_csvs, new_csvs):
+def generate_survey_lookup(old_csvs, new_csvs, null_location_ids):
     survey_match = pd.read_csv(os.path.join(old_csvs, 'survey_match.csv'))
     # Filter relevant columns
     survey_lookup = pd.DataFrame({
@@ -21,7 +21,7 @@ def generate_survey_lookup(old_csvs, new_csvs):
     survey_lookup = survey_lookup.drop_duplicates(subset=['surveyID'])
     survey_lookup = clean_kml_column(survey_lookup)
     # survey_lookup = add_kml_key(survey_lookup, 'KMLs', kml_lookup)
-    survey_lookup = remove_null_rows(survey_lookup)
+    survey_lookup = remove_null_rows(survey_lookup, null_location_ids)
     survey_lookup['date'] = pd.to_datetime(survey_lookup['date']).dt.date
     survey_lookup.to_csv(os.path.join(new_csvs, 'survey_lookup.csv'), index=False)
     return survey_lookup
@@ -38,10 +38,12 @@ def clean_kml_column(survey_lookup):
     return survey_lookup
 
 
-def remove_null_rows(survey_lookup):
-    """Drops rows where mission is labelled '?'"""
+def remove_null_rows(survey_lookup, null_location_ids):
+    """Drops rows which are not useful for Power BI"""
     rows_to_drop = []
     for idx, row in survey_lookup.iterrows():
-        if row['mission'] == '?' or row['pilot'] == 'Test':
+        row_irrelevant = row['mission'] == '?' or row['pilot'] == 'Test'
+        null_location = row['location_id'] in null_location_ids
+        if row_irrelevant or null_location:
             rows_to_drop.append(idx)
     return survey_lookup.drop(index=rows_to_drop)

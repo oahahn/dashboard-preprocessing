@@ -19,14 +19,14 @@ def generate_databases(args):
 
     detections = clean_data(args.old_csv_dir)
     detections, species_lookup = generate_species_lookup(detections, args.new_csv_dir)
-    survey_lookup = generate_survey_lookup(args.old_csv_dir, args.new_csv_dir)
+    null_location_ids = generate_location_lookup(args.old_csv_dir, args.new_csv_dir)
+    survey_lookup = generate_survey_lookup(args.old_csv_dir, args.new_csv_dir, null_location_ids)
     detections, kml_lookup = generate_kml_lookup(detections, survey_lookup, args.old_csv_dir, args.new_csv_dir)
     detections = generate_detections(detections, kml_lookup)
     detections = generate_date_lookup(detections, args.new_csv_dir)
     generate_video_lookup(args.old_csv_dir, args.new_csv_dir)
     detections.to_csv(os.path.join(args.new_csv_dir, 'detections.csv'), index=False)
     generate_individual_databases(args.new_csv_dir, detections, survey_lookup)
-    generate_location_lookup(args.old_csv_dir, args.new_csv_dir)
 
 
 if __name__ == '__main__':
