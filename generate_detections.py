@@ -1,19 +1,19 @@
 import pandas as pd
 
 
-def generate_detections(detections, kml_lookup):
-    detections = add_kml_key_to_detections(detections, kml_lookup)
+def generate_detections(detections):
+    # detections = add_kml_key_to_detections(detections, kml_lookup)
     detections = add_coarse_probability_column(detections)
     return detections
 
 
-def add_kml_key_to_detections(detections, kml_lookup):
-    # Add in the KML ID key to the original detections database
-    kml_lookup_to_merge = kml_lookup[['kmlID', 'filename']]
-    detections = pd.merge(detections, kml_lookup_to_merge, left_on='KML', right_on='filename', validate='many_to_one')
-    # Remove species category and species name from detections database
-    detections = detections.drop(columns=['KML', 'kml_matches', 'filename', 'surveyID'])
-    return detections
+# def add_kml_key_to_detections(detections, kml_lookup):
+#     # Add in the KML ID key to the original detections database
+#     kml_lookup_to_merge = kml_lookup[['kmlID', 'filename']]
+#     detections = pd.merge(detections, kml_lookup_to_merge, left_on='KML', right_on='filename', validate='many_to_one')
+#     # Remove species category and species name from detections database
+#     detections = detections.drop(columns=['KML', 'kml_matches', 'filename', 'surveyID'])
+#     return detections
 
 
 def add_coarse_probability_column(detections):

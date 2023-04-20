@@ -30,7 +30,8 @@ def select_relevant_columns(det_match):
         'kml_matches': det_match['kml_matches'],
         'species_category': det_match['species_category'],
         'species_name': det_match['species_name'],
-        'location_id': det_match['location_id']
+        'location_id': det_match['location_id'],
+        'surveyID': det_match['surveyID']
     })
 
 
