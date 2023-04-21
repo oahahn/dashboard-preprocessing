@@ -8,6 +8,8 @@ def clean_data(old_csvs):
     detections = select_relevant_columns(det_match)
     detections = standardise_species_name(detections)
     detections = standardise_probability(detections)
+    # Filter only high probability of detection
+    detections = detections[detections.probability.isin(["High", "100%"])]
     detections = standardise_species_category(detections)
     detections = correct_species_categories(detections)
     detections = fill_in_null_values(detections)
