@@ -1,3 +1,4 @@
+from download_gdrive_csvs import download_databases
 from data_cleaning import clean_data
 from generate_species_lookup import generate_species_lookup
 from generate_kml_lookup import generate_kml_lookup
@@ -14,6 +15,7 @@ import argparse
 
 
 def generate_databases(args):
+    # download_databases()
     # If the location for the new databases doesn't exist, create it
     if not os.path.isdir(args.new_csv_dir):
         os.makedirs(args.new_csv_dir)

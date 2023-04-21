@@ -3,7 +3,7 @@ import pandas as pd
 
 def generate_detections(detections):
     # detections = add_kml_key_to_detections(detections, kml_lookup)
-    detections = add_coarse_probability_column(detections)
+    detections = filter_only_high_probability(detections)
     return detections
 
 
@@ -16,13 +16,15 @@ def generate_detections(detections):
 #     return detections
 
 
-def add_coarse_probability_column(detections):
-    coarse_probability_list = []
-    for probability in detections['probability'].values:
-        if probability in ['High', '100%']:
-            coarse_probability_list.append('High')
-        else:
-            coarse_probability_list.append('Other')
-    detections['high_probability'] = coarse_probability_list
-    return detections
+# def add_coarse_probability_column(detections):
+#     coarse_probability_list = []
+#     for probability in detections['probability'].values:
+#         if probability in ['High', '100%']:
+#             coarse_probability_list.append('High')
+#         else:
+#             coarse_probability_list.append('Other')
+#     detections['high_probability'] = coarse_probability_list
+#     return detections
 
+def filter_only_high_probability(detections):
+    return detections[detections.probability.isin(["High", "100%"])]
