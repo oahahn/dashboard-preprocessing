@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 from ast import literal_eval
-import numpy as np
 
 
 def generate_videos_database(old_csvs, new_csvs):
