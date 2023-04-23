@@ -7,10 +7,8 @@ def generate_survey_lookup(old_csvs):
     # Filter relevant columns
     survey_lookup = pd.DataFrame({
         'surveyID': survey_match['surveyID'],
-        'pilot': survey_match['pilot'],
         'client': survey_match['client'],
         'mission': survey_match['mission'],
-        'video_length (s)': survey_match['video_length(s)'],
         'date': survey_match['survey_start'],
         'location_id': survey_match['location_id']
     })
@@ -25,7 +23,6 @@ def remove_null_rows(survey_lookup):
     """Drops rows which are not useful for Power BI"""
     rows_to_drop = []
     for idx, row in survey_lookup.iterrows():
-        row_irrelevant = row['mission'] == '?' or row['pilot'] == 'Test'
-        if row_irrelevant:
+        if row['mission'] == '?':
             rows_to_drop.append(idx)
     return survey_lookup.drop(index=rows_to_drop)

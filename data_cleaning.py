@@ -10,11 +10,13 @@ def clean_data(old_csvs):
     detections = standardise_probability(detections)
     # Filter only high probability of detection
     detections = detections[detections.probability.isin(["High", "100%"])]
+    detections = detections.drop(columns=['probability'])
     detections = standardise_species_category(detections)
     detections = correct_species_categories(detections)
     detections = fill_in_null_values(detections)
     detections = add_unspecified_labels(detections)
     detections = remove_geographic_outliers(detections)
+    detections = detections.drop(columns=['latitude', 'longitude'])
     detections = remove_null_rows(detections)
     detections = remove_incorrect_dates(detections)
     return detections
@@ -25,15 +27,11 @@ def select_relevant_columns(det_match):
         'detection_time': det_match['detection_time'],
         'probability': det_match['probability'],
         'detection_count': det_match['detection_count'],
-        'latitude': det_match['drone_lat'],
-        'longitude': det_match['drone_lon'],
         'surveyID': det_match['surveyID'],
-        'KML': det_match['KML'],
-        'kml_matches': det_match['kml_matches'],
         'species_category': det_match['species_category'],
         'species_name': det_match['species_name'],
-        'location_id': det_match['location_id'],
-        'surveyID': det_match['surveyID']
+        'latitude': det_match['drone_lat'],
+        'longitude': det_match['drone_lon']
     })
 
 
@@ -152,6 +150,7 @@ def remove_null_rows(detections):
         if species_null or detection_time_null:
             rows_to_drop.append(idx)
     return detections.drop(index=rows_to_drop)
+
 
 def remove_incorrect_dates(detections):
     # Drops rows where the detection date is before the start of the project
