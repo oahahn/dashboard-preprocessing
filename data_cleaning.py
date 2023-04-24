@@ -14,7 +14,7 @@ def clean_data(old_csvs):
     detections = standardise_species_category(detections)
     detections = correct_species_categories(detections)
     detections = fill_in_null_values(detections)
-    detections = add_unspecified_labels(detections)
+    detections = group_into_coarse_categories(detections)
     detections = remove_geographic_outliers(detections)
     detections = detections.drop(columns=['latitude', 'longitude'])
     detections = remove_null_rows(detections)
@@ -114,13 +114,13 @@ def fill_in_null_values(detections):
     return detections
 
 
-def add_unspecified_labels(detections):
-    # If a pilot has labelled a detection with a general species category, this fills in the species name as unspecified
+def group_into_coarse_categories(detections):
+    # Label all species that are not important enough to display on the dashboard as 'Other'
     for idx, name in detections['species_name'].items():
-        if name in maps.add_species:
-            detections.at[idx, 'species_name'] = 'Other ' + name + ' Species'
-        elif name in maps.add_other:
-            detections.at[idx, 'species_name'] = 'Other ' + name
+        not_important = name not in maps.species_to_display
+        not_other_category = detections.at[idx, 'species_category'] != 'Other'
+        if not_important and not_other_category:
+            detections.at[idx, 'species_name'] = 'Other'
     return detections
 
 

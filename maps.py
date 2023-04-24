@@ -6,7 +6,7 @@ species_name_map = {
     'Aerial Species': ['Aerial'],
     'Bandicoot': ['Small Possible Bandicoot', 'Bandicoit', 'Bandicoot/ Pademelon?', 'Bandicoot?', 'Bandicoot/ Potoroo',
                   'Bandicoot (?)', 'Unknown (Bandicoot/Macropod?)', 'Unknown Mammal (Likely Bandicoot)',
-                  'Small Unknown (Likely Bandicoot)', 'Rabbit/Bandicoot'],
+                  'Small Unknown (Likely Bandicoot)', 'Rabbit/Bandicoot', 'Long-Nosed Bandicoot'],
     'Bird Species': ['Roosting Birds?', 'Flock Of Birds', 'Bird Of Prey', 'Bird Of Prey On Nest', 'Bird On Nest', 'Birds',
              'Small-Ish Bird Or Sugar Glider? (In Flight)', 'Two Birds', 'Rock And Small Roosting Bird?',
              'Medium Sized Unknown Thermal - Ground/ Very Low Arboreal + Small Roosting Birds',
@@ -21,11 +21,12 @@ species_name_map = {
              'Yellow-tailed Black Cockatoo', 'Yellow-Tailed Black Cockatoos (Heard Call)', 'Cockatoo',
              'Yellow-Tail Cockatoos (X8) - Validated', 'Yellow-Tailed Black-Cockatoo', 'Owl', 'Owl Sp.',
              'Large Owl', 'Sooty Owl', 'Sooty Owl (Off Transecrt)', 'Powerful Owl', 'Bird', 'Dusky Woodswallow',
-             'Australian King Parrot', 'Black Cockatoo', 'Gang Gang Cockatoo', 'Laughing Kookaburra', 'Tawny Frogmouth',
-             'Top Knot Pigeons'],
+             'Australian King-Parrot', 'Black Cockatoo', 'Gang-Gang Cockatoos', 'Laughing Kookaburra', 'Tawny Frogmouth',
+             'Topknot Pigeons', 'Musk/Rainbow Lorikeet'],
     'Brushtail Possum': ['Brush Tail', 'Brush-Tailed Possum', 'Probable Brushtail Possum', 'Brushtail Possum',
                         'Brush-Tail Possum', 'Brush Tail Possum', 'Brushtail', 'Mountain Brushtail Possum',
-                         'Mountain Brush-Tailed Possum', 'Mountain Bobuck', 'Common Brushtail Possum'],
+                         'Mountain Brush-Tailed Possum', 'Mountain Bobuck', 'Common Brushtail Possum',
+                         'Mountain Brushtail'],
     'Ringtail Possum': ['Ring Tail', 'Ring-Tailed Possum', 'Small Canopy - Ringtails?', 'Possum - Ringtail?',
                         'Possum (Ringtail?)', 'Possum - Ringtail ?', 'Probable Possum (Not Koala) - Ringtail?',
                         'Ringtail Possums', 'Ringtail And 3 Small Ground Mammals', 'Ringtail Possum ?',
@@ -41,7 +42,8 @@ species_name_map = {
                    'Grey Headed Flying Foxes', 'Grey Headed Flying Fox'],
     'Red fox': ['Fox'],
     'Glider': ['Glider - Gliding', 'Glider (Seen Airborne Only)', 'Glider Gliding', 'Glider Sp.', 'Glider And Wombat',
-               'Small Glider', 'Large Glider (Greater Glider/Yellow Bellied Glider)', 'Small Other - Possible Glider'],
+               'Small Glider', 'Large Glider (Greater Glider/Yellow Bellied Glider)', 'Small Other - Possible Glider',
+               'Squirrel Glider', 'Sugar\Squirrel Glider'],
     'Goat': ['Goats', 'Goat Residual Body Heat Marks ?', 'Goats (Probable)', 'Goats Off Transect', 'Sheep Or Goat',
              'Goat (X3)', 'Sheep/Goat'],
     'Greater Glider': ['Greater Gliders', 'Greater Glider? Plus 2X Ground',
@@ -59,7 +61,8 @@ species_name_map = {
                'Unknown Large Ground Detection Under Tree', 'Sleeping Large Mammal/S ?',
                'Unknown Small Ground Detection', 'Small Ground Detections', 'Ground Sp.', 'Small Ground Detection',
                'Ground Sp', 'Small', 'Unsure', 'Australian Brushturkey', 'Brush Turkey', 'Aus Brushturkeys', 'Cow',
-                       'Cows', 'Dog', 'Dogs', 'Echidna', 'Australian Brush-Turkey', 'Broad-Toothed Rat', 'Emu'],
+                       'Cows', 'Dog', 'Dogs', 'Echidna', 'Australian Brush-Turkey', 'Broad-Toothed Rat', 'Emu',
+                'Frog - Tricky To Identify To Species :)'],
     'Horse': ['Horses', 'Horse/Deer', 'Horse/Pig/Other', 'Horse/Pig'],
     'Koala': ['Pademelon/ Parma Wallaby (Plus Koala)', 'Koala (Same Koala)', 'Koala With Joey',
               'Unknown (Low Probability Koala)'],
@@ -83,20 +86,18 @@ species_name_map = {
     'Quoll': ['Quoll?', 'Quoll/Cat/Fox', 'Possum/Quoll'],
     'Sugar Glider': ['Sugar/ Squirrel Glider', 'Glider - Sugar/ Squirrel?'],
     'Rabbit': ['Rabbits'],
-    'Termite Nest': ['Termite Mound', 'Termite', 'Arboreal Termite Nest?', 'Tree Growth/ Termites', 'Termite Or Hollow'],
+    # 'Termite Nest': ['Termite Mound', 'Termite', 'Arboreal Termite Nest?', 'Tree Growth/ Termites', 'Termite Or Hollow'],
     'Tree Hollow': ['Animal In Chimney Hollow', 'Hollow Possible Occupants', 'Tree Hollow To Rd',
                     'Vertical Hollow', 'Tree Hollow/Bee Hive/Temrites', 'Hollow Plus Maybe Unknown Arboreal', 'Hollow ?',
                     'Occupied Hollow', 'Chimney Tree Hollow', 'Chimney Hollow', 'Chimney Hollows', 'Stag Hollow',
-                    'Occupied Hollow (In Fallen Stag)', 'Hollow'],
-    'Unspecified': ['Unknown - Not A Koala', 'Unknown (X2)', 'Unknown (Fast?)', 'Unknown, Small', 'Unvalidated',
-                'Validate Not Found', 'Small Mammal (X3)', '2X Small Mammal', 'Small Mammal', 'Small Mammal (X2)',
-                'Small Unknown', 'Small Mammal Sp', 'Smmall Mammal', 'Canopy', 'Mammal', 'Small Detection', 'Low',
-                '', 'nan', 'NaN', 'Other', 'Unknown'],
+                    'Occupied Hollow (In Fallen Stag)', 'Hollow', 'Termite Mound', 'Termite', 'Arboreal Termite Nest?',
+                    'Tree Growth/ Termites', 'Termite Or Hollow', 'Termite Nest'],
     'Yellow-bellied Glider': ['Glider (Prob Yellow-Bellied)',
                               'Several Gliders/ Possums. 4 Probable Yellow-Bellied Gliders? Below (One Seen In Flight) Plus One Sugar Glider At Eye Level',
                               'Yellow-Bellied Glider', 'Yellow Belly Glider', 'Yellow Glider'],
     'Wallaby': ['Wallaby And Other Small Ground Mammals?', 'Maybe Wallaby', 'Wallaby (Multiple)', 'Wallabies',
-                'Wallaby (X2)', 'Red-necked Wallaby', 'Red Necked Wallaby', 'Red-Necked Wallaby', 'Rock Wallaby'],
+                'Wallaby (X2)', 'Red-necked Wallaby', 'Red Necked Wallaby', 'Red-Necked Wallaby', 'Rock Wallaby',
+                'Hill Wallaroo'],
     'Wombat': ['2 Macropod 1 Wombat', 'Wombat And Wallaby', 'Wombat And Macropod?', 'Wombats',
                'Macropods And Wombat (3 Animals)', 'Wombat/ Deer?', 'Wombat?', 'Wombat Or Deer?',
                'Uncertain, Maybe Wombat', 'Pig Or Wombat', 'Unknown (Wombat)', 'Wombat (X2)',
@@ -114,7 +115,10 @@ broad_species_name_map = {
 to_remove = ['Dummy', 'Human', 'Bulge On Branch', 'Human', 'No Detection', 'Uncertain',
              'Cannot Tell? Wasp Nest?', 'Possibly Hot Rocks', 'Rocks?', 'Rock', 'Maybe Rock?', 'Hbt',
              'Ns West Start Terrible Reception, Difficult To Descend For Closer Inspection',
-             'Other - Add Details In Notes', 'NaN', '', ' ', 'Squirrel']
+             'Other - Add Details In Notes', 'NaN', '', ' ', 'Squirrel', 'Unknown - Not A Koala', 'Unknown (X2)',
+             'Unknown (Fast?)', 'Unknown, Small', 'Unvalidated', 'Validate Not Found', 'Small Mammal (X3)',
+             '2X Small Mammal', 'Small Mammal', 'Small Mammal (X2)', 'Small Unknown', 'Small Mammal Sp', 'Smmall Mammal',
+             'Canopy', 'Mammal', 'Small Detection', 'Low', '', 'nan', 'NaN', 'Other', 'Unknown']
 
 doubles = ['2 Macropod 1 Wombat', 'Possum And 2 Macropods', 'Wombat And Wallaby',
            'Pademelon/ Parma Wallaby (Plus Koala)', 'Greater Glider? Plus 2X Ground',
@@ -147,11 +151,15 @@ species_category_map = {
 species_category_corrections = {
     'Aerial Species': ['Musk Lorikeet', 'Kookaburra', 'Flying Fox', 'Microbat', 'Sooty Owl', 'Parrot', 'Cockatoo',
                        'Yellow-tailed Black Cockatoo', 'Dusky Woodswallow', 'Powerful Owl', 'Grey-headed Flying Fox',
-                       'Common Bronzewing', 'Magpie', 'Bat'],
+                       'Common Bronzewing', 'Magpie', 'Bat', 'Bird Species'],
     'Arboreal Species': ['Mountain Brushtail Possum', 'Ringtail Possum', 'Short-eared Possum', 'Kreffts Glider',
-                         'Yellow-bellied Glider', 'Glider', 'Feathertail Glider', 'Greater Glider', 'Sugar Glider'],
-    'Ground Species': ['Cat', 'Fox', 'Cow', 'Goat'],
-    'Macropod': ['Potoroo', 'Pademelon', 'Rock Wallaby']
+                         'Yellow-bellied Glider', 'Glider', 'Feathertail Glider', 'Greater Glider', 'Sugar Glider',
+                         'Possum'],
+    'Ground Species': ['Cat', 'Fox', 'Cow', 'Goat', 'Rodent', 'Deer', 'Wombat', 'Bandicoot', 'Ground Species', 'Horse',
+                       'Red fox', 'Dingo'],
+    'Macropod': ['Potoroo', 'Pademelon', 'Rock Wallaby', 'Kangaroo', 'Wallaby', 'Macropod', 'Eastern Grey Kangaroo',
+                 'Swamp Wallaby'],
+    'Other': ['Tree Hollow']
 }
 
 null_species_category_corrections = {
@@ -176,13 +184,15 @@ null_species_category_corrections = {
     'Swamp Wallaby': 'Macropod'
 }
 
-add_species = ['Possum', 'Kangaroo', 'Wallaby', 'Glider']
+# add_species = ['Possum', 'Kangaroo', 'Wallaby', 'Glider']
 
-add_other = ['Ground Species', 'Arboreal Species', 'Aerial Species', 'Macropod']
+convert_to_other = ['Ground Species', 'Arboreal Species', 'Aerial Species', 'Macropod']
 
-aerial_species_to_display = ['Flying Fox']
+species_to_display = ['Flying Fox', 'Possum', 'Glider', 'Koala', 'Wombat', 'Deer', 'Rabbit', 'Goat', 'Kangaroo',
+                      'Wallaby', 'Potoroo', 'Dingo']
 
-species_to_display = {
+
+species_to_display_old = {
     'aerial': ['Flying Fox'],
     'arboreal': ['Possum', 'Glider', 'Koala'],
     'ground': ['Wombat', 'Deer', 'Rabbit', 'Goat'],

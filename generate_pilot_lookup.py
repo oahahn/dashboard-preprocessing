@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import numpy as np
 
 
 pilot_list = ['Matt Clements', 'Chad Beranek', 'Lachlan Hall', 'Sabrina Velasco', 'Pearce Thomas', 'George Madani',
@@ -12,7 +13,8 @@ pilot_list = ['Matt Clements', 'Chad Beranek', 'Lachlan Hall', 'Sabrina Velasco'
 
 def generate_pilot_lookup(new_csvs):
     pilot_lookup = pd.DataFrame({
+        'index': np.arange(len(pilot_list)),
         'name': pilot_list
     })
 
-    pilot_lookup.to_csv(os.path.join(new_csvs, 'pilot_lookup.csv'))
+    pilot_lookup.to_csv(os.path.join(new_csvs, 'pilot_lookup.csv'), index=False)
