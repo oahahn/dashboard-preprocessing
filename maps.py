@@ -17,10 +17,12 @@ species_name_map = {
              'Superb Lyrebird', 'White-Winged Chough', 'Parrot/ Cockatoos ?', 'Parrots', 'Crimson Roaella',
              'Dusky Woodswallows - Communal Roost', 'Birds- Kookaburra', 'Lyre Bird', 'Lyre Bied', 'Magpies',
              'Bronzewings (X2) - Validated By Ground Crew', 'White-winged Chough', 'White Winged Chough', 'Lorikeet',
-                     'Cockatoos And Warm Hollow', 'Cockatoos (X3)', 'Sulfur-Crested', 'Sulfur-Crested Cockatoo',
-                     'Yellow-tailed Black Cockatoo', 'Yellow-Tailed Black Cockatoos (Heard Call)', 'Cockatoo',
-                     'Yellow-Tail Cockatoos (X8) - Validated', 'Yellow-Tailed Black-Cockatoo', 'Owl', 'Owl Sp.',
-                     'Large Owl', 'Sooty Owl', 'Sooty Owl (Off Transecrt)', 'Powerful Owl', 'Bird', 'Dusky Woodswallow'],
+             'Cockatoos And Warm Hollow', 'Cockatoos (X3)', 'Sulfur-Crested', 'Sulfur-Crested Cockatoo',
+             'Yellow-tailed Black Cockatoo', 'Yellow-Tailed Black Cockatoos (Heard Call)', 'Cockatoo',
+             'Yellow-Tail Cockatoos (X8) - Validated', 'Yellow-Tailed Black-Cockatoo', 'Owl', 'Owl Sp.',
+             'Large Owl', 'Sooty Owl', 'Sooty Owl (Off Transecrt)', 'Powerful Owl', 'Bird', 'Dusky Woodswallow',
+             'Australian King Parrot', 'Black Cockatoo', 'Gang Gang Cockatoo', 'Laughing Kookaburra', 'Tawny Frogmouth',
+             'Top Knot Pigeons'],
     'Brushtail Possum': ['Brush Tail', 'Brush-Tailed Possum', 'Probable Brushtail Possum', 'Brushtail Possum',
                         'Brush-Tail Possum', 'Brush Tail Possum', 'Brushtail', 'Mountain Brushtail Possum',
                          'Mountain Brush-Tailed Possum', 'Mountain Bobuck', 'Common Brushtail Possum'],
@@ -101,6 +103,14 @@ species_name_map = {
                'Wombat And Small Unidentified Ground']
 }
 
+broad_species_name_map = {
+    'Other': ['Arboreal Species', 'Aerial Species', 'Bird Species', 'Cat', 'Red Fox', 'Goat', 'Horse', 'Pademelon',
+              'Potoroo', 'Quoll'],
+    'Possum': ['Brushtail Possum', 'Ringtail Possum'],
+    'Kangaroo': ['Eastern Grey Kangaroo'],
+    'Glider': ['Feathertail Glider', 'Greater Glider', 'Kreffts Glider', 'Sugar Glider', 'Yellow-bellied Glider']
+}
+
 to_remove = ['Dummy', 'Human', 'Bulge On Branch', 'Human', 'No Detection', 'Uncertain',
              'Cannot Tell? Wasp Nest?', 'Possibly Hot Rocks', 'Rocks?', 'Rock', 'Maybe Rock?', 'Hbt',
              'Ns West Start Terrible Reception, Difficult To Descend For Closer Inspection',
@@ -169,3 +179,12 @@ null_species_category_corrections = {
 add_species = ['Possum', 'Kangaroo', 'Wallaby', 'Glider']
 
 add_other = ['Ground Species', 'Arboreal Species', 'Aerial Species', 'Macropod']
+
+aerial_species_to_display = ['Flying Fox']
+
+species_to_display = {
+    'aerial': ['Flying Fox'],
+    'arboreal': ['Possum', 'Glider', 'Koala'],
+    'ground': ['Wombat', 'Deer', 'Rabbit', 'Goat'],
+    'macropod': ['Kangaroo', 'Wallaby', 'Potoroo']
+}

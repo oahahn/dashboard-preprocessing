@@ -9,7 +9,7 @@ def generate_survey_lookup(old_csvs):
         'surveyID': survey_match['surveyID'],
         'client': survey_match['client'],
         'mission': survey_match['mission'],
-        'date': survey_match['survey_start'],
+        'date': survey_match['start_time'],
         'location_id': survey_match['location_id']
     })
     # Drop duplicate surveyID entries

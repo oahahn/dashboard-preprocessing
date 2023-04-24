@@ -15,4 +15,4 @@ def generate_pilot_lookup(new_csvs):
         'name': pilot_list
     })
 
-    pilot_lookup.to_csv(os.path.join(new_csvs, 'pilot_lookup.csv'), index=False)
+    pilot_lookup.to_csv(os.path.join(new_csvs, 'pilot_lookup.csv'))

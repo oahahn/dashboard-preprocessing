@@ -21,7 +21,7 @@ def generate_species_lookup(detections, new_csvs):
     # Remove species category and species name from detections database
     detections = detections.drop(columns=['species_category', 'species_name'])
     generate_species_category_lookup(species_lookup, new_csvs)
-    return detections, species_lookup
+    return detections
 
 
 def generate_species_category_lookup(species_lookup, new_csvs):
