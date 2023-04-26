@@ -31,7 +31,8 @@ def select_relevant_columns(det_match):
         'species_category': det_match['species_category'],
         'species_name': det_match['species_name'],
         'latitude': det_match['drone_lat'],
-        'longitude': det_match['drone_lon']
+        'longitude': det_match['drone_lon'],
+        'client': det_match['client']
     })
 
 
