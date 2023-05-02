@@ -42,5 +42,4 @@ def clean_client_column(videos_database):
         if client == '0':
             count += 1
             videos_database.at[idx, 'client'] = np.nan
-    print(f'Count is: {count}')
     return videos_database
