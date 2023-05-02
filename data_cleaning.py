@@ -16,7 +16,7 @@ def clean_data(old_csvs):
     detections = fill_in_null_values(detections)
     detections = group_into_coarse_categories(detections)
     detections = remove_geographic_outliers(detections)
-    detections = detections.drop(columns=['latitude', 'longitude'])
+    # detections = detections.drop(columns=['latitude', 'longitude'])
     detections = remove_null_rows(detections)
     detections = remove_incorrect_dates(detections)
     return detections
