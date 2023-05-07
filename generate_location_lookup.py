@@ -15,6 +15,7 @@ def generate_location_lookup(old_csvs, new_csvs, survey_lookup):
     survey_lookup = pd.merge(left=survey_lookup, right=location_lookup, on='location_id', validate='many_to_one')
     survey_lookup = remove_null_rows(survey_lookup)
     survey_lookup = remove_geographic_outliers(survey_lookup)
+    survey_lookup = remove_null_areas(survey_lookup)
     survey_lookup.to_csv(os.path.join(new_csvs, 'survey_lookup.csv'), index=False)
 
 
@@ -40,3 +41,17 @@ def remove_geographic_outliers(survey_lookup):
 
     # Remove vague detections
     return survey_lookup.drop(index=remove_indices)
+
+
+def remove_null_areas(survey_lookup):
+    """Drops LGAs which have null area i.e. haven't been flown yet"""
+    # First group by LGA and count the combined area flown in each
+    area_by_lga = survey_lookup.groupby("lga")["area"].count()
+    # Then drop LGAs with 0 combined area counts
+    lgas_to_drop = []
+    for lga, area in area_by_lga.items():
+        if area == 0:
+            lgas_to_drop.append(lga)
+    for lga in lgas_to_drop:
+        survey_lookup = survey_lookup.drop(survey_lookup[survey_lookup.lga == lga].index)
+    return survey_lookup
