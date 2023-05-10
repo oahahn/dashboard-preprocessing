@@ -4,7 +4,6 @@ __pycache__
 *.csv
 install-packages
 temp.py
-*.txt
 download_gdrive_csvs.py
 Data/DAMSELFISH_distributions.cpg
 Data/DAMSELFISH_distributions.dbf
