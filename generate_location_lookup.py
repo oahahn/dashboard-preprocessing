@@ -1,5 +1,8 @@
 import pandas as pd
 import os
+import geopandas as gpd
+from shapely.geometry import Polygon
+import numpy as np
 
 
 def generate_location_lookup(old_csvs, new_csvs, survey_lookup):
@@ -9,13 +12,18 @@ def generate_location_lookup(old_csvs, new_csvs, survey_lookup):
         'lat': location_dataframe['lat'],
         'lon': location_dataframe['lon'],
         'area': location_dataframe['area'],
-        'lga': location_dataframe['lga']
+        'lga': location_dataframe['lga'],
+        'lat_min': location_dataframe['lat_min'],
+        'lat_max': location_dataframe['lat_max'],
+        'lon_min': location_dataframe['lon_min'],
+        'lon_max': location_dataframe['lon_max']
     })
 
     survey_lookup = pd.merge(left=survey_lookup, right=location_lookup, on='location_id', validate='many_to_one')
     survey_lookup = remove_null_rows(survey_lookup)
     survey_lookup = remove_geographic_outliers(survey_lookup)
     survey_lookup = remove_null_areas(survey_lookup)
+    survey_lookup = create_shapefile(survey_lookup)
     survey_lookup.to_csv(os.path.join(new_csvs, 'survey_lookup.csv'), index=False)
 
 
@@ -25,7 +33,8 @@ def remove_null_rows(survey_lookup):
     for idx, row in survey_lookup.iterrows():
         lat_lon_null = pd.isnull(row['lat']) and pd.isnull(row['lon'])
         lat_lon_zero = (row['lat'] == 0) and (row['lon'] == 0)
-        if lat_lon_null or lat_lon_zero:
+        lat_min_null = pd.isnull(row['lat_min'])
+        if lat_lon_null or lat_lon_zero or lat_min_null:
             rows_to_drop.append(idx)
     return survey_lookup.drop(index=rows_to_drop)
 
@@ -55,3 +64,21 @@ def remove_null_areas(survey_lookup):
     for lga in lgas_to_drop:
         survey_lookup = survey_lookup.drop(survey_lookup[survey_lookup.lga == lga].index)
     return survey_lookup
+
+
+def create_shapefile(survey_lookup):
+    survey_small = survey_lookup.drop(columns=['surveyID', 'client', 'date', 'lat', 'lon', 'mission'])
+    survey_small['survey_sites'] = survey_small.apply(
+        lambda x: Polygon(zip(
+            [x.lon_min, x.lon_max, x.lon_max, x.lon_min],
+            [x.lat_min, x.lat_min, x.lat_max, x.lat_max])
+        ), axis=1
+    )
+    survey_small = survey_small.drop(columns=['lon_min', 'lon_max', 'lat_min', 'lat_max'])
+    survey_small.to_csv('survey_small.csv')
+    survey_geoframe = gpd.GeoDataFrame(
+        survey_small, geometry=survey_small.survey_sites, crs="EPSG:4326"
+    )
+    survey_geoframe.drop('survey_sites', axis=1, inplace=True)
+    survey_geoframe.to_file(filename='shapefiles/locations.shp', driver="ESRI Shapefile")
+    return survey_lookup.drop(columns=['lon_min', 'lon_max', 'lat_min', 'lat_max'])

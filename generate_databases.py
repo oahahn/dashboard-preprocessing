@@ -1,11 +1,9 @@
 from download_gdrive_csvs import download_databases
 from data_cleaning import clean_data
-from generate_species_lookup import generate_species_lookup
 from generate_survey_lookup import generate_survey_lookup
 from generate_videos_database import generate_videos_database
 from generate_pilot_lookup import generate_pilot_lookup
 from generate_location_lookup import generate_location_lookup
-
 import os
 import argparse
 

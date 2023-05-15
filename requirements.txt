@@ -1,6 +1,8 @@
-gdown
 oauth2client
 httplib2
 pandas
 # pip install google-api-python-client
 docxtpl
+geopandas
+shapely
+numpy
