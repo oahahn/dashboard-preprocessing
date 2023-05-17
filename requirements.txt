@@ -6,3 +6,5 @@ docxtpl
 geopandas
 shapely
 numpy
+mapbox-tilesets
+chardet
