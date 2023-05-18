@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "layers": {
+    "lgas": {
+      "source": "mapbox://tileset-source/oahahn/nsw-lgas-source",
+      "minzoom": 0,
+      "maxzoom": 9
+    }
+  }
+}

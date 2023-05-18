@@ -2,9 +2,12 @@
   "version": 1,
   "layers": {
     "locations": {
-      "source": "mapbox://tileset-source/oahahn/locations-GeoJSON-source",
+      "source": "mapbox://tileset-source/oahahn/locations-GeoJSON-shp-source",
       "minzoom": 0,
-      "maxzoom": 16
+      "maxzoom": 9,
+      "features": {
+        "simplification": 0
+      }
     }
   }
 }

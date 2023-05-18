@@ -8,3 +8,5 @@ download_gdrive_csvs.py
 storage.json
 locations
 Data
+shapefiles/nsw-lgas-GeoJSON.json
+shapefiles/nsw-lga-boundaries.geojson
