@@ -11,9 +11,10 @@
       "minzoom": 0,
       "maxzoom": 9,
       "features": {
-        "attributes": {
-          "zoom_element": [ "location_id" ]
-        }
+        "simplification": [ "case",
+          [ "<=", [ "zoom" ], 4 ], 0,
+          4
+        ]
       }
     }
   }
