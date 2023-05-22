@@ -6,10 +6,7 @@
       "minzoom": 0,
       "maxzoom": 9,
       "features": {
-        "simplification": [ "case",
-          [ "<=", [ "zoom" ], 4 ], 0,
-          4
-        ]
+        "simplification": 0
       }
     }
   }
