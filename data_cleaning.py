@@ -146,12 +146,12 @@ def remove_geographic_outliers(detections):
     # Cycle through the latitude and longitude columns and search for coordinates outside NSW
     remove_indices = []
     for idx, row in detections.iterrows():
-        latitude_outside_nsw = (row['latitude'] < -37.505768) or (row['latitude'] > -28.156804)
-        negative_latitude_in_nsw = (-row['latitude'] > -37.505768) or (-row['latitude'] < -28.156804)
-        longitude_outside_nsw = (row['longitude'] < 140.993300) or (row['longitude'] > 153.638805)
+        latitude_outside_nsw = (float(row['latitude']) < -37.505768) or (float(row['latitude']) > -28.156804)
+        negative_latitude_in_nsw = (-float(row['latitude']) > -37.505768) or (-float(row['latitude']) < -28.156804)
+        longitude_outside_nsw = (float(row['longitude']) < 140.993300) or (float(row['longitude']) > 153.638805)
         # Some latitude coordinates were missing a minus sign
         if latitude_outside_nsw and negative_latitude_in_nsw:
-            detections.at[idx, 'latitude'] = -row['latitude']
+            detections.at[idx, 'latitude'] = -float(row['latitude'])
         elif latitude_outside_nsw or longitude_outside_nsw:
             remove_indices.append(idx)
 
