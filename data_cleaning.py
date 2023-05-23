@@ -122,6 +122,7 @@ def use_broader_species_names(detections):
         for species in maps.species_to_display:
             if species in name:
                 detections.at[idx, 'species_name'] = species
+                break
     return detections
 
 
