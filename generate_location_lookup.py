@@ -81,5 +81,4 @@ def create_shapefile(survey_lookup):
     )
     survey_geoframe.drop('survey_sites', axis=1, inplace=True)
     survey_geoframe.to_file(filename='shapefiles/locations.shp', driver="GeoJSON")
-    # survey_geoframe.to_file(filename='shapefiles/locations.shp', driver="ESRI Shapefile")
     return survey_lookup.drop(columns=['lon_min', 'lon_max', 'lat_min', 'lat_max'])

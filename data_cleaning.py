@@ -14,6 +14,7 @@ def clean_data(old_csvs):
     detections = standardise_species_category(detections)
     detections = correct_species_categories(detections)
     detections = fill_in_null_values(detections)
+    detections = use_broader_species_names(detections)
     detections = group_into_coarse_categories(detections)
     detections = remove_geographic_outliers(detections)
     # detections = detections.drop(columns=['latitude', 'longitude'])
@@ -115,13 +116,28 @@ def fill_in_null_values(detections):
     return detections
 
 
+def use_broader_species_names(detections):
+    # This method maps specific names like Brushtail Possum to general names like Possum for display on the dashboard
+    for idx, name in detections['species_name'].items():
+        for species in maps.species_to_display:
+            if species in name:
+                detections.at[idx, 'species_name'] = species
+    return detections
+
+
 def group_into_coarse_categories(detections):
     # Label all species that are not important enough to display on the dashboard as 'Other'
+    other_detections = []
     for idx, name in detections['species_name'].items():
         not_important = name not in maps.species_to_display
         not_other_category = detections.at[idx, 'species_category'] != 'Other'
         if not_important and not_other_category:
+            other_detections.append(detections.loc[idx])
             detections.at[idx, 'species_name'] = 'Other'
+    column_names = ['detection_time', 'detection_count', 'surveyID', 'species_category',
+                    'species_name', 'latitude', 'longitude', 'client']
+    other_detections_df = pd.DataFrame(other_detections, columns=column_names)
+    other_detections_df.to_csv('other_detections2.csv')
     return detections
 
 
