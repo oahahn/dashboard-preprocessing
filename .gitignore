@@ -4,7 +4,7 @@ __pycache__
 *.csv
 install-packages
 temp.py
-download_gdrive_csvs.py
+gdrive.py
 storage.json
 locations
 Data
