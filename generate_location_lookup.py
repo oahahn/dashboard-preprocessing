@@ -11,7 +11,7 @@ def generate_location_lookup(old_csvs, new_csvs, survey_lookup):
         'location_id': location_dataframe['location_id'],
         'lat': location_dataframe['lat'],
         'lon': location_dataframe['lon'],
-        'area': location_dataframe['area'],
+        'area': location_dataframe['total_area'],
         'lga': location_dataframe['lga'],
         'lat_min': location_dataframe['lat_min'],
         'lat_max': location_dataframe['lat_max'],
