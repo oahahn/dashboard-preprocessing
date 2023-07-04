@@ -1,4 +1,4 @@
-import gdrive
+from gdrive import download_files
 from data_cleaning import clean_data
 from generate_survey_lookup import generate_survey_lookup
 from generate_videos_database import generate_videos_database
@@ -10,7 +10,7 @@ import argparse
 
 def generate_databases(args, download_databases):
     if download_databases:
-        gdrive.download_files()
+        download_files()
         
     # If the location for the new databases doesn't exist, create it
     if not os.path.isdir(args.new_csv_dir):
