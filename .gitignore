@@ -11,4 +11,4 @@ Data
 shapefiles/nsw-lgas-GeoJSON.json
 shapefiles/nsw-lga-boundaries.geojson
 gdrive.py
-useful-tileset-commands.md
+shapefiles/useful-tileset-commands.md

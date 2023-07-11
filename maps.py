@@ -22,7 +22,9 @@ species_name_map = {
              'Yellow-Tail Cockatoos (X8) - Validated', 'Yellow-Tailed Black-Cockatoo', 'Owl', 'Owl Sp.',
              'Large Owl', 'Sooty Owl', 'Sooty Owl (Off Transecrt)', 'Powerful Owl', 'Bird', 'Dusky Woodswallow',
              'Australian King-Parrot', 'Black Cockatoo', 'Gang-Gang Cockatoos', 'Laughing Kookaburra', 'Tawny Frogmouth',
-             'Topknot Pigeons', 'Musk/Rainbow Lorikeet'],
+             'Topknot Pigeons', 'Musk/Rainbow Lorikeet', 'Galah', 'Galah - Not Listed In Bird List', 'Galahs',
+            'Ringneck Parrot (Malleee)', 'Glossy Ibis', 'Crow', 'Crested Pigeon', 'Eastern Rosella', 'Raven',
+            'Wedge-Tailed Eagle', 'Quail', 'Rosella', 'White Faced Hero', 'Topknot Pigeon'],
     'Brushtail Possum': ['Brush Tail', 'Brush-Tailed Possum', 'Probable Brushtail Possum', 'Brushtail Possum',
                         'Brush-Tail Possum', 'Brush Tail Possum', 'Brushtail', 'Mountain Brushtail Possum',
                          'Mountain Brush-Tailed Possum', 'Mountain Bobuck', 'Common Brushtail Possum',
@@ -39,7 +41,7 @@ species_name_map = {
                            'Feathertail Gliders (X2)'],
     'Flying Fox': ['Flying-Fox', 'Flying Fox Fly-By', 'Single Video, Flying Fox Close', 'Pteropus Sp,', 'Bat',
                    'Bats', 'Bats Or Birds', 'Microbat In Flight', 'Microbat', 'Grey-headed Flying Fox',
-                   'Grey Headed Flying Foxes', 'Grey Headed Flying Fox'],
+                   'Grey Headed Flying Foxes', 'Grey Headed Flying Fox', 'Bat Sp.'],
     'Red fox': ['Fox'],
     'Glider': ['Glider - Gliding', 'Glider (Seen Airborne Only)', 'Glider Gliding', 'Glider Sp.', 'Glider And Wombat',
                'Small Glider', 'Large Glider (Greater Glider/Yellow Bellied Glider)', 'Small Other - Possible Glider',
@@ -184,17 +186,16 @@ null_species_category_corrections = {
     'Swamp Wallaby': 'Macropod'
 }
 
-# add_species = ['Possum', 'Kangaroo', 'Wallaby', 'Glider']
-
 convert_to_other = ['Ground Species', 'Arboreal Species', 'Aerial Species', 'Macropod']
+
+species_categories_to_display = {
+    'Aerial Species': ['Flying Fox', 'Other'],
+    'Arboreal Species': ['Possum', 'Glider', 'Koala', 'Other'],
+    'Ground Species': ['Wombat', 'Deer', 'Rabbit', 'Goat', 'Dingo', 'Other'],
+    'Macropod': ['Wallaby', 'Potoroo', 'Kangaroo'],
+    'Other': ['Tree Hollow']
+}
 
 species_to_display = ['Flying Fox', 'Possum', 'Glider', 'Koala', 'Wombat', 'Deer', 'Rabbit', 'Goat', 'Kangaroo',
                       'Wallaby', 'Potoroo', 'Dingo']
 
-
-species_to_display_old = {
-    'aerial': ['Flying Fox'],
-    'arboreal': ['Possum', 'Glider', 'Koala'],
-    'ground': ['Wombat', 'Deer', 'Rabbit', 'Goat'],
-    'macropod': ['Kangaroo', 'Wallaby', 'Potoroo']
-}

@@ -30,4 +30,4 @@ if __name__ == '__main__':
     parser.add_argument('-od', '--old_csv_dir', default='old-csvs')
     parser.add_argument('-nd', '--new_csv_dir', default='new-csvs')
     args = parser.parse_args()
-    generate_databases(args, download_databases=True)
+    generate_databases(args, download_databases=False)

@@ -20,6 +20,8 @@ def clean_data(old_csvs):
     # detections = detections.drop(columns=['latitude', 'longitude'])
     detections = remove_null_rows(detections)
     detections = remove_incorrect_dates(detections)
+    detections = correct_categories(detections)
+    detections = flag_incorrect_categorisation(detections)
     return detections
 
 
@@ -135,10 +137,6 @@ def group_into_coarse_categories(detections):
         if not_important and not_other_category:
             other_detections.append(detections.loc[idx])
             detections.at[idx, 'species_name'] = 'Other'
-    column_names = ['detection_time', 'detection_count', 'surveyID', 'species_category',
-                    'species_name', 'latitude', 'longitude', 'client']
-    other_detections_df = pd.DataFrame(other_detections, columns=column_names)
-    other_detections_df.to_csv('other_detections2.csv')
     return detections
 
 
@@ -180,3 +178,42 @@ def remove_incorrect_dates(detections):
             rows_to_drop.append(idx)
     return detections.drop(index=rows_to_drop)
 
+
+def correct_categories(detections):
+    # Goes through the species names and makes sure they are properly categorised
+    for idx, row in detections.iterrows():
+        name = row['species_name']
+        category = row['species_category']
+        if category == 'Ground Species' and name == 'Wallaby':
+            detections.at[idx, 'species_category'] = 'Macropod'
+        elif category == 'Glider':
+            detections.at[idx, 'species_category'] = 'Arboreal Species'
+    return detections
+
+
+def flag_incorrect_categorisation(detections):
+    for index, row in detections.iterrows():
+        species_name = row['species_name']
+        species_category = row['species_category']
+
+        # Perform your custom validation based on your knowledge or assumptions
+        if species_category == 'Aerial Species':
+            valid_species = ['Flying Fox', 'Other']
+        elif species_category == 'Arboreal Species':
+            valid_species = ['Possum', 'Glider', 'Koala', 'Other']
+        elif species_category == 'Ground Species':
+            valid_species = ['Wombat', 'Deer', 'Rabbit', 'Goat', 'Dingo', 'Other']
+        elif species_category == 'Macropod':
+            valid_species = ['Wallaby', 'Potoroo', 'Kangaroo', 'Other']
+        elif species_category == 'Other':
+            valid_species = ['Tree Hollow', 'Other']
+        else:
+            print(f"Invalid species category: {species_category}")
+            # Perform further actions if needed, such as handling the invalid category
+            continue
+
+        if species_name not in valid_species:
+            print(f"Invalid species name: {species_name} in category: {species_category}")
+            # Perform further actions if needed, such as updating the category or handling the invalid entry
+
+    return detections
