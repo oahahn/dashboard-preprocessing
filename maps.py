@@ -37,6 +37,7 @@ species_name_map = {
     'Deer': ['Dear', 'Deer/Kangaroo'],
     'Eastern Grey Kangaroo': ['Eastern Grey', 'Macropod (Eastern Grey Kangaroos)', 'Macropod (Eastern Grey )',
                               'Grey Kangaroo'],
+    'Kangaroo': [],
     'Feathertail Glider': ['Fethertail Glider', 'Feathertail', 'Feather-Tailed Glider Or Bird',
                            'Feathertail Gliders (X2)'],
     'Flying Fox': ['Flying-Fox', 'Flying Fox Fly-By', 'Single Video, Flying Fox Close', 'Pteropus Sp,', 'Bat',
@@ -66,7 +67,7 @@ species_name_map = {
                        'Cows', 'Dog', 'Dogs', 'Echidna', 'Australian Brush-Turkey', 'Broad-Toothed Rat', 'Emu',
                 'Frog - Tricky To Identify To Species :)'],
     'Horse': ['Horses', 'Horse/Deer', 'Horse/Pig/Other', 'Horse/Pig'],
-    'Koala': ['Pademelon/ Parma Wallaby (Plus Koala)', 'Koala (Same Koala)', 'Koala With Joey',
+    'Koala': ['Koala (Same Koala)', 'Koala With Joey',
               'Unknown (Low Probability Koala)'],
     'Kreffts Glider': ['Krefts Glider'],
     'Macropod': ['Small Macropod', 'Macropod?', 'Macropod ?', 'Ground Macropod', 'Macropods', 'Macropod (With Joey)',
@@ -87,6 +88,7 @@ species_name_map = {
                'Brushtail/Ringtail', 'Short-eared Possum', 'Short-Eared Possum W/ Pouch Young', 'Short-Eared Possum'],
     'Quoll': ['Quoll?', 'Quoll/Cat/Fox', 'Possum/Quoll'],
     'Sugar Glider': ['Sugar/ Squirrel Glider', 'Glider - Sugar/ Squirrel?'],
+    'Swamp Wallaby': [],
     'Rabbit': ['Rabbits'],
     # 'Termite Nest': ['Termite Mound', 'Termite', 'Arboreal Termite Nest?', 'Tree Growth/ Termites', 'Termite Or Hollow'],
     'Tree Hollow': ['Animal In Chimney Hollow', 'Hollow Possible Occupants', 'Tree Hollow To Rd',
@@ -103,7 +105,8 @@ species_name_map = {
     'Wombat': ['2 Macropod 1 Wombat', 'Wombat And Wallaby', 'Wombat And Macropod?', 'Wombats',
                'Macropods And Wombat (3 Animals)', 'Wombat/ Deer?', 'Wombat?', 'Wombat Or Deer?',
                'Uncertain, Maybe Wombat', 'Pig Or Wombat', 'Unknown (Wombat)', 'Wombat (X2)',
-               'Wombat And Small Unidentified Ground']
+               'Wombat And Small Unidentified Ground'],
+    'no_detection': ['ns west start terrible reception, difficult to descend for closer inspection', 'dummy', 'no detection'],
 }
 
 broad_species_name_map = {
