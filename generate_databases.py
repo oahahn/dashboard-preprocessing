@@ -8,8 +8,8 @@ import os
 import argparse
 
 
-def generate_databases(args, download_databases):
-    if download_databases:
+def generate_databases(args):
+    if args.download_databases:
         download_files()
         
     # If the location for the new databases doesn't exist, create it
@@ -29,5 +29,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-od', '--old_csv_dir', default='old-csvs')
     parser.add_argument('-nd', '--new_csv_dir', default='new-csvs')
+    parser.add_argument('-dd', '--download_databases', action='store_true', default=False)
     args = parser.parse_args()
-    generate_databases(args, download_databases=False)
+    generate_databases(args)
