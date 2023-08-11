@@ -5,10 +5,7 @@ __pycache__
 install-packages
 temp.py
 gdrive.py
-storage.json
 locations
 Data
-shapefiles/nsw-lgas-GeoJSON.json
 shapefiles/nsw-lga-boundaries.geojson
 gdrive.py
-shapefiles/useful-tileset-commands.md
