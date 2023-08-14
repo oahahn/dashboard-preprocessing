@@ -17,9 +17,8 @@ def generate_databases(args):
         os.makedirs(args.new_csv_dir)
 
     detections = clean_data(args.old_csv_dir)
-    # detections = generate_species_lookup(detections, args.new_csv_dir)
-    survey_lookup = generate_survey_lookup(args.old_csv_dir)
-    generate_location_lookup(args.old_csv_dir, args.new_csv_dir, survey_lookup)
+    generate_survey_lookup(args.old_csv_dir, args.new_csv_dir)
+    generate_location_lookup(args.old_csv_dir, args.new_csv_dir)
     generate_videos_database(args.old_csv_dir, args.new_csv_dir)
     generate_pilot_lookup(args.new_csv_dir)
     detections.to_csv(os.path.join(args.new_csv_dir, 'detections.csv'), index=False)

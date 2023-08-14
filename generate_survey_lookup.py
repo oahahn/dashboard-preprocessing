@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 
-def generate_survey_lookup(old_csvs):
+def generate_survey_lookup(old_csvs, new_csvs):
     survey_match = pd.read_csv(os.path.join(old_csvs, 'survey_match.csv'))
     # Filter relevant columns
     survey_lookup = pd.DataFrame({
@@ -16,7 +16,7 @@ def generate_survey_lookup(old_csvs):
     survey_lookup = survey_lookup.drop_duplicates(subset=['surveyID'])
     survey_lookup = remove_null_rows(survey_lookup)
     survey_lookup['date'] = pd.to_datetime(survey_lookup['date']).dt.date
-    return survey_lookup
+    survey_lookup.to_csv(os.path.join(new_csvs, 'survey_lookup.csv'), index=False)
 
 
 def remove_null_rows(survey_lookup):
