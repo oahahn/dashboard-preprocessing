@@ -4,8 +4,8 @@ __pycache__
 *.csv
 install-packages
 temp.py
-gdrive.py
 locations
 Data
 shapefiles/nsw-lga-boundaries.geojson
-gdrive.py
+client_id.json
+storage.json
