@@ -11,7 +11,7 @@ def generate_videos_database(old_csvs, new_csvs):
         'date': pd.to_datetime(video_matches['creation_time']).dt.date,
         'file_size': video_matches['file_size'],
         'duration': video_matches['duration'],
-        'surveyID': video_matches['surveyID0'],
+        'surveyID': video_matches['surveyID'],
         'client': video_matches['client']
     })
     videos_database = remove_null_rows(videos_database)
