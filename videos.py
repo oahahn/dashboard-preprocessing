@@ -12,7 +12,8 @@ def generate_videos_database(old_csvs, new_csvs):
         'file_size': video_matches['file_size'],
         'duration': video_matches['duration'],
         'surveyID': video_matches['surveyID'],
-        'client': video_matches['client']
+        'client': video_matches['client'],
+        'location_id': video_matches['kml_location_id']
     })
     videos_database = remove_null_rows(videos_database)
     videos_database = clean_survey_id_column(videos_database)
