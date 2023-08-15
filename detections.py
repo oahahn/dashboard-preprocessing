@@ -3,7 +3,7 @@ import maps
 import os
 
 
-def clean_data(old_csvs):
+def generate_detections(old_csvs):
     det_match = pd.read_csv(os.path.join(old_csvs, 'det_match.csv')).drop_duplicates()
     detections = select_relevant_columns(det_match)
     detections = standardise_species_name(detections)

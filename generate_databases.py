@@ -1,9 +1,9 @@
 from gdrive import download_files
-from data_cleaning import clean_data
-from generate_survey_lookup import generate_survey_lookup
-from generate_videos_database import generate_videos_database
-from generate_pilot_lookup import generate_pilot_lookup
-from generate_location_lookup import generate_location_lookup
+from detections import generate_detections
+from surveys import generate_survey_lookup
+from videos import generate_videos_database
+from pilots import generate_pilot_lookup
+from locations import generate_location_lookup
 import os
 import argparse
 
@@ -16,7 +16,7 @@ def generate_databases(args):
     if not os.path.isdir(args.new_csv_dir):
         os.makedirs(args.new_csv_dir)
 
-    detections = clean_data(args.old_csv_dir)
+    detections = generate_detections(args.old_csv_dir)
     generate_survey_lookup(args.old_csv_dir, args.new_csv_dir)
     generate_location_lookup(args.old_csv_dir, args.new_csv_dir)
     generate_videos_database(args.old_csv_dir, args.new_csv_dir)
